@@ -6,7 +6,6 @@
 package com.web.fixture.controladores;
 
 import com.web.fixture.entidades.Equipo;
-import com.web.fixture.repositorios.FixtureRepositorio;
 import com.web.fixture.servicios.FixtureServicio;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
