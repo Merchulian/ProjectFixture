@@ -26,8 +26,8 @@ public class PartidoEliminatorioServicio {
     private EquipoRepositorio equipoRepositorio;
     
     public  void pase3and4yPaseFinal(){
-        ArrayList<PartidoEliminatorio> Partidos3ery4to = partidoRep.buscarPartidosxFase("3ER Y 4TO Puesto");
-      ArrayList<PartidoEliminatorio> PartidosFinal = partidoRep.buscarPartidosxFase("Final");
+       ArrayList<PartidoEliminatorio> Partidos3ery4to = partidoRep.buscarPartidosxFase("3ER Y 4TO Puesto");
+       ArrayList<PartidoEliminatorio> PartidosFinal = partidoRep.buscarPartidosxFase("Final");
        ArrayList<PartidoEliminatorio> PartidosSemi = partidoRep.buscarPartidosxFase("Semifinales");
     
         for (PartidoEliminatorio partidoSemi : PartidosSemi) {
@@ -151,8 +151,6 @@ public class PartidoEliminatorioServicio {
                 }
             }
        }
-       
-   
    }
     
     public void paseCuartos(){

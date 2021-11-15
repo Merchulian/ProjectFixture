@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -18,20 +19,21 @@
                 <li><a href="#">Noticias</a></li>
             </ul>
             <ul class="Registrar">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/registro">Registro</a></li>
+                <li><a href="/logout">Salir</a></li>
+                
+                <li><a th:if="${session.usuariosession != null}" th:text="${session.usuariosession.nombre}"></a></li>
+                <!-- dejarlo comentado por que tira error. --> 
+               <li><a th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.idUsuario}__)}">Editar Perfil</a></li> 
             </ul>
         </nav>
     </header>
     <main>
         <div class="button-container">
             <img class="Img-principal" src="assets/IMG/Imagen-del-Boton.jpeg" alt="principal"/>
-            <p th:if="${titulo != null}" th:text="${titulo}" style="color:black"></p>
-            <p th:if="${descripcion != null}" th:text="${descripcion}" style="color:black" ></p>
-            <a href="/login" alt="Mi Fixture">Completa tu Fixture!!!</a>
+            <a href="/fixture" >Completa tu Fixture!!!</a>
         </div>
         <!-- start feedwind code --> 
-       <!-- <script class="Img-Noticias"type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading" data-fw-param="150798/"></script>  end feedwind code -->
+       <!--  <script class="Img-Noticias"type="text/javascript" src="https://feed.mikle.com/js/fw-loader.js" preloader-text="Loading" data-fw-param="150798/"></script> <!-- end feedwind code -->
         <div class="button-container">
             <img class="Img-principal" src="/login" alt="Posiciones"/>
             <a href="#">Posiciones</a>

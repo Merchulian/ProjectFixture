@@ -5,6 +5,7 @@
  */
 package com.web.fixture.seguridad;
 
+import com.web.fixture.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -22,15 +23,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Order(1)
 public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private UsuarioServicio usuarioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
 
     @Autowired
     public void ConfigureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-//        auth
-//                .userDetailsService(usuarioServicio) //Le decimos a Spring Security cual es el servicio que tiene que utilizar para identificar al usuario
-//                .passwordEncoder(new BCryptPasswordEncoder());
+        auth
+                .userDetailsService(usuarioServicio) //Le decimos a Spring Security cual es el servicio que tiene que utilizar para identificar al usuario
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -38,17 +39,17 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
         System.out.println("=============================================================");
         http
                 .authorizeRequests()
-                .antMatchers("/css/", "/js/", "/img/", "/*").permitAll()
-                .and().formLogin()
+                     .antMatchers("/css/", "/js/", "/img/", "/*").permitAll()
+                     .and().formLogin()
                 .loginPage("/login") // Que formulario esta mi login
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("username") // Como viajan los datos del logueo
-                .passwordParameter("password")// Como viajan los datos del logueo
-                .defaultSuccessUrl("/inicio") // A que URL viaja 
-                .permitAll()
-                .and().logout() // Aca configuro la salida
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll().and().csrf().disable();
+                     .loginProcessingUrl("/logincheck")//url que usara para autenticar el usuario.
+                          .usernameParameter("username") // Como viajan los datos del logueo
+                          .passwordParameter("password")// Como viajan los datos del logueo
+                          .defaultSuccessUrl("/inicio") // A que URL viaja, cambiar esto si queremos
+                          .permitAll()
+                     .and().logout() // Aca configuro la salida
+                          .logoutUrl("/logout")
+                          .logoutSuccessUrl("/login?logout")
+                          .permitAll().and().csrf().disable();
     }
 }

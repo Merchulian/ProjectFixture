@@ -67,6 +67,11 @@ public class FixtureServicio {
             part.setGrupo(partidoG.getGrupo());
             listaPartidoGrupo.add(part);
         }
+        
+        for (CalendarioGrupo Grupo : listaGrupos) {
+            System.out.println(Grupo);
+        }
+        
         /* Busco la info de los partidos Eliminatorios*/
         for(CalendarioEliminatorio partidoE : listaEliminatorio){
             PartidoEliminatorio part = new PartidoEliminatorio();

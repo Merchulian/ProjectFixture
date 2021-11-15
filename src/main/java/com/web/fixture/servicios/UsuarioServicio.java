@@ -44,9 +44,11 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String apellido, String email, String clave, String clave2) throws ErrorServicio {
-
+        
+        //falta la validacion de email, que no se pueda registrar una persona con un email ya registrado.
+        
         validar(nombre, apellido, email, clave, clave2);
-        System.out.println("datos validados");
+
         Usuario usuario = new Usuario(); //Creamos un objeto usuario
         usuario.setNombre(nombre); // lo llenamos con los datos que nos llega del registro web
         usuario.setApellido(apellido);
@@ -54,7 +56,6 @@ public class UsuarioServicio implements UserDetailsService {
 
         String encriptada = new BCryptPasswordEncoder().encode(clave);
         usuario.setClave(encriptada);
-        System.out.println("clave guardada!!!");
         usuario.setAlta(new Date()); 
 
         /* Foto foto = fotoServicio.guardar(archivo);
@@ -65,18 +66,20 @@ public class UsuarioServicio implements UserDetailsService {
        // usuarioRepositorio.save(usuario); //Le decimos al repositorio que lo guarde en la base de datos. El repositorio es el encargado de transformar ese objeto en una o más tablas de la base de datos
     
         usuario.setFixture(fixtureServicio.creaFixture());
-        System.out.println("fixture creado");
-   /**/ System.out.println(usuario.getFixture().toString());
         usuarioRepositorio.save(usuario);
     }
-               
+    
+    //ESTO ES PARA QUE UN USUARIO LOGUEADO SOLO PUEDE MODIFICAR SUS DATOS
+    //    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @Transactional
-    public void modificar(MultipartFile archivo, String idUsuario, String nombre, String apellido, String email, String clave1, String clave2, String zona) throws ErrorServicio {
+    public void modificar(MultipartFile archivo, String idUsuario, String nombre, String apellido, String email, String clave1, String clave2) throws ErrorServicio {
 
         validar(nombre, apellido, email, clave1, clave2);
         
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario); //mediante la clase Optional nos fijamos si con el id devuelve un usuario
         
+        System.out.println("//////////////////////////");
+        System.out.println("entra al modificar");
         if (respuesta.isPresent()) { //si respuesta devuelve un usuario entonces modificalo
             Usuario usuario = respuesta.get();
             usuario.setNombre(nombre); // seteamos el nuevo dato
@@ -84,7 +87,8 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setEmail(email);
             String encriptada = new BCryptPasswordEncoder().encode(clave1);
             usuario.setClave(encriptada);
-
+             
+            /*
             String idFoto = null;
 
             if (usuario.getFoto() != null) { // si el usuario tiene una foto asignada 
@@ -93,7 +97,7 @@ public class UsuarioServicio implements UserDetailsService {
 
             }
             Foto foto = fotoServicio.actualizar(idFoto, archivo); //Si yo le mando un id nulo igual me va a traer el objeto foto con un id generado automáticamente y el resto de los atributos
-            usuario.setFoto(foto);
+            usuario.setFoto(foto); */
 
             usuarioRepositorio.save(usuario); //Le decimos al repositorio que lo guarde en la base de datos. El repositorio es el encargado de transformar ese objeto en una o más tablas de la base de datos
 
@@ -162,14 +166,17 @@ public class UsuarioServicio implements UserDetailsService {
             //Esto es lo que le da los permisos al usuario, a que modulos puede acceder
             List<GrantedAuthority> permisos = new ArrayList();  // le crea permisos
 
-            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_REGISTRADO");
+            GrantedAuthority p1 = new SimpleGrantedAuthority("ROLE_USUARIO_AUTORIZADO");
             permisos.add(p1);
 
 //Esto me permite guardar el OBJETO USUARIO LOG, para luego ser utilizado
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); //Esta llamada va a recuperar los atributos del request
             HttpSession session = attr.getRequest().getSession(true); // una vez que trae la solicitud va a solicitar los datos de sesion de esa solicitud de http
             session.setAttribute("usuariosession", usuario); // en los datos de sesion vioy a guardar un atributo que se va a llamar usuario session. Ese atributo va a guardar el objeto usuario que acabo de ir a buscar a la BD
-
+            
+            System.out.println("//////////////////////////////////////////////////");
+            System.out.println(usuario.getIdUsuario());
+            
             User user = new User(usuario.getEmail(), usuario.getClave(), permisos);
 
             return user;

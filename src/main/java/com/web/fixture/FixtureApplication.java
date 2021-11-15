@@ -9,9 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class FixtureApplication {
-
-        @Autowired
-        private UsuarioServicio usuarioServicio;
+//
+//        @Autowired
+//        private UsuarioServicio usuarioServicio;
        
 	public static void main(String[] args) {
 		SpringApplication.run(FixtureApplication.class, args);
