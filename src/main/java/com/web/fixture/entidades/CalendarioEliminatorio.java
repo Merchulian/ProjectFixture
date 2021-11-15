@@ -1,4 +1,4 @@
-
+/*            El nuevo atributo se llama tag   */
 package com.web.fixture.entidades;
 
 import java.util.Date;
@@ -17,6 +17,8 @@ public class CalendarioEliminatorio {
     private Integer idPartido;
     
     private String fase;
+    
+    private String tag;
 
     @ManyToOne
     private Equipo equipo1;
@@ -28,77 +30,72 @@ public class CalendarioEliminatorio {
     @Temporal(TemporalType.DATE)
     private Date fecha;
 
-    /**
-     * @return the idPartido
-     */
+//  Constructors
+
+    public CalendarioEliminatorio() {
+    }
+
+    public CalendarioEliminatorio(Integer idPartido, String fase, String tag, Equipo equipo1, Equipo equipo2, Date fecha) {
+        this.idPartido = idPartido;
+        this.fase = fase;
+        this.tag = tag;
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
+        this.fecha = fecha;
+    }
+   
+// getters
     public Integer getIdPartido() {
         return idPartido;
     }
 
-    /**
-     * @return the fase
-     */
     public String getFase() {
         return fase;
     }
 
-    /**
-     * @return the equipo1
-     */
+    public String getTag() {
+        return tag;
+    }
+
     public Equipo getEquipo1() {
         return equipo1;
     }
 
-    /**
-     * @return the equipo2
-     */
     public Equipo getEquipo2() {
         return equipo2;
     }
 
-    /**
-     * @return the fecha
-     */
     public Date getFecha() {
         return fecha;
     }
 
-    /**
-     * @param idPartido the idPartido to set
-     */
+//  Setters
+    
     public void setIdPartido(Integer idPartido) {
         this.idPartido = idPartido;
     }
 
-    /**
-     * @param fase the fase to set
-     */
     public void setFase(String fase) {
         this.fase = fase;
     }
 
-    /**
-     * @param equipo1 the equipo1 to set
-     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     public void setEquipo1(Equipo equipo1) {
         this.equipo1 = equipo1;
     }
 
-    /**
-     * @param equipo2 the equipo2 to set
-     */
     public void setEquipo2(Equipo equipo2) {
         this.equipo2 = equipo2;
     }
 
-    /**
-     * @param fecha the fecha to set
-     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    
+
 }
 
 
