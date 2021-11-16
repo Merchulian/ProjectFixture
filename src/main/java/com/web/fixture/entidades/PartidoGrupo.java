@@ -26,115 +26,101 @@ public class PartidoGrupo {
     @ManyToOne
     private Equipo equipo2;
     
-    // dijimos que la fecha sería una buena id así que lo cambié y comenté el idPartido
+    // cambiado el tipo a DATE
     @Temporal(TemporalType.DATE)
     private Date fecha;
     
     private String grupo;
+    // nuevo tag
+    private String tag;
 
+    // resultado partido
     private Integer golesEquipo1;
 
     private Integer golesEquipo2;
 
-     
 
-    /**
-     * @return the idPartido
-     */
+//  Constructores
+
+    public PartidoGrupo() {
+    }
+
+    public PartidoGrupo(Integer idPartido, Equipo equipo1, Equipo equipo2, Date fecha, String grupo, String tag, Integer golesEquipo1, Integer golesEquipo2) {
+        this.idPartido = idPartido;
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
+        this.fecha = fecha;
+        this.grupo = grupo;
+        this.tag = tag;
+        this.golesEquipo1 = golesEquipo1;
+        this.golesEquipo2 = golesEquipo2;
+    }
+// Getters
+
     public Integer getIdPartido() {
         return idPartido;
     }
 
-    /**
-     * @return the equipo1
-     */
     public Equipo getEquipo1() {
         return equipo1;
     }
 
-    /**
-     * @return the equipo2
-     */
     public Equipo getEquipo2() {
         return equipo2;
     }
 
-    /**
-     * @return the fecha
-     */
     public Date getFecha() {
         return fecha;
     }
 
-    /**
-     * @return the golesEquipo1
-     */
-    public Integer getGolesEquipo1() {
-        return golesEquipo1;
-    }
-
-    /**
-     * @return the golesEquipo2
-     */
-    public Integer getGolesEquipo2() {
-        return golesEquipo2;
-    }
-
-    /**
-     * @return the grupo
-     */
     public String getGrupo() {
         return grupo;
     }
 
-    /**
-     * @param idPartido the idPartido to set
-     */
+    public String getTag() {
+        return tag;
+    }
+
+    public Integer getGolesEquipo1() {
+        return golesEquipo1;
+    }
+
+    public Integer getGolesEquipo2() {
+        return golesEquipo2;
+    }
+
+//  Setters
+
     public void setIdPartido(Integer idPartido) {
         this.idPartido = idPartido;
     }
 
-    /**
-     * @param equipo1 the equipo1 to set
-     */
     public void setEquipo1(Equipo equipo1) {
         this.equipo1 = equipo1;
     }
 
-    /**
-     * @param equipo2 the equipo2 to set
-     */
     public void setEquipo2(Equipo equipo2) {
         this.equipo2 = equipo2;
     }
 
-    /**
-     * @param fecha the fecha to set
-     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    /**
-     * @param golesEquipo1 the golesEquipo1 to set
-     */
-    public void setGolesEquipo1(Integer golesEquipo1) {
-        this.golesEquipo1 = golesEquipo1;
-    }
-
-    /**
-     * @param golesEquipo2 the golesEquipo2 to set
-     */
-    public void setGolesEquipo2(Integer golesEquipo2) {
-        this.golesEquipo2 = golesEquipo2;
-    }
-
-    /**
-     * @param grupo the grupo to set
-     */
     public void setGrupo(String grupo) {
         this.grupo = grupo;
     }
 
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setGolesEquipo1(Integer golesEquipo1) {
+        this.golesEquipo1 = golesEquipo1;
+    }
+
+    public void setGolesEquipo2(Integer golesEquipo2) {
+        this.golesEquipo2 = golesEquipo2;
+    }
 
 }
