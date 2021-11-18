@@ -1,47 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.web.fixture.controladores;
 
-import com.web.fixture.entidades.Equipo;
+
+
+import com.web.fixture.entidades.Usuario;
 import com.web.fixture.repositorios.FixtureRepositorio;
+import com.web.fixture.repositorios.PartidoGrupoRepositorio;
 import com.web.fixture.servicios.FixtureServicio;
+
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/fixture")
 public class FixtureControlador {
-    
+    @Autowired
     private FixtureServicio fixtureServicio;
+    @Autowired
+    private FixtureRepositorio fixtureRepositorio;
+    @Autowired
+    private PartidoGrupoRepositorio partidoGrupoRepositorio;
+    @GetMapping("/")
     
-    @GetMapping("/fixture")
-    public String fixture() {
-
-        return "fixture.html";
+    public String fixture(HttpSession session , @RequestParam String id) {
+        Usuario login= (Usuario) session.getAttribute("usuariosession");
+        if (login == null || !login.getIdUsuario().equals(id))  {
+        return "redirect:/inicio";}
+        else{
+            return "fixture.html";}
     }
     
-    /* MÉTODO GANADOR VA A UTILIZAR UNA QUERY DE EQUIPOREP para buscar el equipo que tiene como fase "ganador". 
-    Este método debe ejecutarse una vez que se reciban los datos del último partido. Devuelve un objeto Equipo 
-    que es luego mostrado en las vistas. Desde las vistas se podría hacer un if (si los campos de fase final 
-    están llenos, entonces que llame a este método > /ganador {ganador*/ 
-    @GetMapping("/ganador") ///REVER METODO.
-    public Equipo ganador(){
+    @GetMapping("/mostrar-Fixture")
+    public String mostrarFixture(){
+    /*model.put(datos previamente guardado )*/
+    
+    return "fixture.html";}
+    
+    
+    @PostMapping("/definir-partido")
+    public String definirPartidoGrupo(HttpSession session, ModelMap model ,@RequestParam String id, @RequestParam Integer golesEquipo1 , @RequestParam Integer golesEquipo2 ){
         
-        try {
-            Equipo equipo = fixtureServicio.encontrarGanador();
-            return equipo;
-        } catch (Exception e) {
-        System.err.print(e.getMessage());
-
+        /*testear metodos para elegir ganandor de la fase de grupos*/
+        /*      persistir datos del usuario
+          buscar el fixture del usuario
+          traer el partido que corresponde  
+        
+        */
+        
+        
+        
+        System.out.println("id: " + id +"\n" + "||"  +  golesEquipo1 + " || " + golesEquipo2);
+        return "redirect:/fixture";
         }
-        return null;
-    }
-    
-       
     
     
 }
+        
+

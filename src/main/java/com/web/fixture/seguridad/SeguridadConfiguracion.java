@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 
 @Configuration
@@ -52,4 +53,5 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
                           .logoutSuccessUrl("/login?logout")
                           .permitAll().and().csrf().disable();
     }
+
 }

@@ -23,15 +23,15 @@ public class UsuarioControlador {
     private UsuarioServicio usuarioServicio;
     
     //habilitar esto una vez que pueda pasar como parametro el id de la vista inicio
-    //    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @GetMapping("/editar-perfil")
     public String editarPerfil( HttpSession session,@RequestParam String id, ModelMap model){
         
         //esto evita que una persona que sabe un id de otra pueda entrar y modificar sus datos, habilitar cuando se habilite el preAuthorize
-//        Usuario login= (Usuario) session.getAttribute("usuariosession");
-//        if (login == null || !login.getIdUsuario().equals(id))  {
-//             return "redirect:/inicio";
-//        }
+        Usuario login= (Usuario) session.getAttribute("usuariosession");
+        if (login == null || !login.getIdUsuario().equals(id))  {
+             return "redirect:/inicio";
+        }
         
         try{
             Usuario usuario = usuarioServicio.buscarPorId(id);
@@ -43,15 +43,18 @@ public class UsuarioControlador {
         return "actualizarPerfil.html";
     }
     
-//    @PreAuthorize("hasAnyRole('ROLE_USUARIO_REGISTRADO')")
+    
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @PostMapping("/actualizar-perfil")
-    public String registrar(ModelMap modelo,HttpSession session, MultipartFile archivo, @RequestParam String idUsuario,@RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String clave1, @RequestParam String clave2){
+    public String registrar(ModelMap modelo,HttpSession session, MultipartFile archivo, @RequestParam String idUsuario,@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String clave1, @RequestParam String clave2){
         Usuario usuario = new Usuario();
         try{
             
             usuario = usuarioServicio.buscarPorId(idUsuario);
-            usuarioServicio.modificar(archivo, idUsuario, nombre, apellido, mail, clave1, clave2);
+            usuarioServicio.modificar(archivo, idUsuario, nombre, apellido, email, clave1, clave2);
             session.setAttribute("usuariosession", usuario);
+            
+            //PREGUNTAR POR QUE CON EL INCIO SOLO NO ANDA.
             return "redirect:/inicio";
         }catch(ErrorServicio e){
             modelo.put("error", e.getMessage());

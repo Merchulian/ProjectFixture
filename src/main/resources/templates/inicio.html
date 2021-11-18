@@ -14,9 +14,9 @@
             <h2 class="Titulo">FIFA WORLD CUP QATAR 2022 FIXTURE</h2>
             <ul class="menu">
                 <li><a href="/">Inicio</a></li>
-                <li><a href="/login">Mi Fixture</a></li>
+                <li><a th:href="@{/fixture(id=__${session.usuariosession.idUsuario}__)}">Mi Fixture</a></li>
                 <li><a href="/login">Posiciones</a></li>
-                <li><a href="#">Noticias</a></li>
+                <li><a href="/noticias">Noticias</a></li>
             </ul>
             <ul class="Registrar">
                 <li><a href="/logout">Salir</a></li>

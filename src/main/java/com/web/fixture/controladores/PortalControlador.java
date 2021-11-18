@@ -46,6 +46,12 @@ public class PortalControlador {
         return "index.html";
     }
     
+    @GetMapping("/noticias")
+    public String verNoticias() {
+		
+        return "Noticias.html";
+    }
+    
     @GetMapping("/login")
     public String login(ModelMap modelo, @RequestParam(required = false) String error, @RequestParam(required = false) String logout) {
         if (error != null) {
@@ -89,15 +95,15 @@ public class PortalControlador {
     }
     
     //EL FIXTURE SOLO PODRA INGRESAR UN USUARIO LOGUEADO.
-    //@PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @GetMapping("/fixture")
     public String fixture() {
 		
         return "fixture.html";
     }
     
-     //A ESTADISTICAS SOLO PODRA INGRESAR UN USUARIO LOGUEADO, DEBIDO QUE LAS MISMAS SE CREAN EN BASE AL FIXTURE COMPLETADO
-    //@PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
+//     A ESTADISTICAS SOLO PODRA INGRESAR UN USUARIO LOGUEADO, DEBIDO QUE LAS MISMAS SE CREAN EN BASE AL FIXTURE COMPLETADO
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @GetMapping("/estadisticas")
     public String estadisticas() {
 		

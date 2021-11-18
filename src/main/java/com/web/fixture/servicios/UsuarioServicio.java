@@ -45,6 +45,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String apellido, String email, String clave, String clave2) throws ErrorServicio {
         
+        //IMPORTANTE HACER ESTO
         //falta la validacion de email, que no se pueda registrar una persona con un email ya registrado.
         
         validar(nombre, apellido, email, clave, clave2);
@@ -58,10 +59,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setClave(encriptada);
         usuario.setAlta(new Date()); 
 
-        /* Foto foto = fotoServicio.guardar(archivo);
-        usuario.setFoto(foto);*/
+        Foto foto = fotoServicio.guardar(archivo);
+        usuario.setFoto(foto);
 
-        //creo y seteo el fixture en usuario y en fixture servicio tmb le enlazo el usuario y queda completa la relacion fixture/usuario
+       
  
        // usuarioRepositorio.save(usuario); //Le decimos al repositorio que lo guarde en la base de datos. El repositorio es el encargado de transformar ese objeto en una o más tablas de la base de datos
     
@@ -78,8 +79,7 @@ public class UsuarioServicio implements UserDetailsService {
         
         Optional<Usuario> respuesta = usuarioRepositorio.findById(idUsuario); //mediante la clase Optional nos fijamos si con el id devuelve un usuario
         
-        System.out.println("//////////////////////////");
-        System.out.println("entra al modificar");
+        
         if (respuesta.isPresent()) { //si respuesta devuelve un usuario entonces modificalo
             Usuario usuario = respuesta.get();
             usuario.setNombre(nombre); // seteamos el nuevo dato

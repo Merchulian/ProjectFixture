@@ -31,30 +31,38 @@
     <main>
         <div class="Container-Register">
         <div class="Register-Form">
-    <form action ="/usuario/actualizar-perfil" method="POST" enctype="multipart/form-data" class="Register-Form-F">
-        
-        <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
-        
-        <input type="hidden"  name="idUsuario" th:value="${perfil.idUsuario}">
-        
-        <label for="nombre" class="Register-P">Nombre</label> <br> 
-        <input type="text" id="nombre" name="nombre" class="Register-I" th:value="${perfil.nombre}"> <br>            
-        <label for="apellido"class="Register-P">Apellido</label> <br>  
-        <input type="text" id="apellido" name="apellido" class="Register-I" th:value="${perfil.apellido}"> <br>
-        <label for="mail"class="Register-P">Mail</label> <br>
-        <input type="email" id="mail" name="email" class="Register-I" th:value="${perfil.email}"> <br> 
-        <label for="contraseña"class="Register-P">Contraseña</label> <br> 
-        <input type="password" id="contraseña" name="contraseña" class="Register-I" th:value="${clave1}"> <br>    
-        <label for="confirma"class="Register-P">Confirmar</label> <br> 
-        <input type="password" id="confirma" name="confirma contraseña" class="Register-I" th:value="${clave2}"> <br>
-       
+            
+            <!--        Agregar donde quieran una foto cualquiera, lo que hace los tag img es buscar si el usuario tiene una imagen la pone y si no pone la que se asigna por defecto  --> 
+            <!--    <img  th:if="${perfil.foto != null}" th:src="${'/foto/usuario/' + perfil.idUsuario'}" alt="" >
+            <img  th:if="${perfil.foto == null}" scr="aca agregar foto por defecto" alt="" >  --> 
+            
+            
+            
+            
+            <form action ="/usuario/actualizar-perfil" method="POST" enctype="multipart/form-data" class="Register-Form-F">
 
-        <label class="Register-P">Subí tu foto</label> <br>
-        <input type="file" name="archivo" class="Register-I"> <br> 
-        
-        
-        <button type="submit"class="Register-B">Enviar</button>                           
-        <button type="reset"class="Register-B">Borrar</button>
+               <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
+
+               <input type="hidden"  name="idUsuario" th:value="${perfil.idUsuario}">
+
+               <label for="nombre" class="Register-P">Nombre</label> <br> 
+               <input type="text" id="nombre" name="nombre" class="Register-I" th:value="${perfil.nombre}"> <br>            
+               <label for="apellido"class="Register-P">Apellido</label> <br>  
+               <input type="text" id="apellido" name="apellido" class="Register-I" th:value="${perfil.apellido}"> <br>
+               <label for="email"class="Register-P">Email</label> <br>
+               <input type="email" id="email" name="email" class="Register-I" th:value="${perfil.email}"> <br> 
+               <label for="contraseña"class="Register-P">Contraseña</label> <br> 
+               <input type="password" id="contraseña" name="clave1" class="Register-I" th:value="${clave1}"> <br>    
+               <label for="confirma"class="Register-P">Confirmar</label> <br> 
+               <input type="password" id="confirma" name="clave2" class="Register-I" th:value="${clave2}"> <br>
+
+
+               <label class="Register-P">Subí tu foto</label> <br>
+               <input type="file" name="archivo" class="Register-I"> <br> 
+
+
+               <button type="submit"class="Register-B">Enviar</button>                           
+               <button type="reset"class="Register-B">Borrar</button>
     </div> 
 
     <div><img src="" alt=""></div>
