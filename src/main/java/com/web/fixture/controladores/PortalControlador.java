@@ -107,10 +107,10 @@ public class PortalControlador {
             Fixture fixture = usuario.getFixture();
             String goles1="";
             String goles2="";
-            for (Integer i = 1; i <= 2; i++) {
+            for (Integer i = 1; i <= 24; i++) {
                 PartidoGrupo partido = partidoGrupoServicio.traerPartido(fixture.getId() ,i.toString());
                 System.out.println("partido " + partido.getTag());
-            
+                
                 goles1 ="golesEquipo1_" + i;
                 goles2 ="golesEquipo2_" + i;
                 System.out.println(goles1 + "  ||  " + goles2);
@@ -119,6 +119,8 @@ public class PortalControlador {
                     model.put(goles2 , partido.getGolesEquipo2());
                 }
             }
+            //mejorar vista
+            
             return "fixture.html";
         }else{
             return "redirect:/logout";}

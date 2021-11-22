@@ -57,7 +57,7 @@ public class PartidoGrupoServicio {
         System.out.println("goles equipo 2: " + partido.getEquipo2());
         /*persistir los datos cargados*/
         partidoGrupoRepositorio.save(partido);
-        System.out.println("partido guardado!!!");
+        System.out.println("partido "+partido.getIdPartido()+ " guardado!!!");
         }catch(ErrorServicio ex){
         ex.getMessage();
         }
