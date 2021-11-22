@@ -17,4 +17,11 @@ public interface PartidoEliminatorioRepositorio extends JpaRepository<PartidoEli
         
     @Query("SELECT c FROM PartidoEliminatorio c WHERE c.fase = :fase ORDER BY c.idPartido asc")
     public ArrayList<PartidoEliminatorio> buscarPartidosxFase(@Param("fase") String fase);
+    
+    @Query("SELECT c FROM PartidoEliminatorio c WHERE c.letraID LIKE %:letraID% ORDER BY c.letraID ASC")
+    public ArrayList<PartidoEliminatorio> buscarNextPartidoXletraID(@Param("letraID") String letraID);
+    
+//   @Query("SELECT c FROM PartidoEliminatorio c WHERE c.letraID LIKE %:letraID% AND LENGTH(c.letraID)= aux")
+//    public PartidoEliminatorio buscarNextPartidoXletraID(@Param("letraID") String letraID);
+
 }

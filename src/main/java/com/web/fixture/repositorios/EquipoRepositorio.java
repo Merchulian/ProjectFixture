@@ -16,10 +16,6 @@ public interface EquipoRepositorio  extends JpaRepository<Equipo, Integer>{
     @Query("SELECT c FROM Equipo c WHERE c.grupo = :grupo ORDER BY c.puntaje DESC, c.golesFavor DESC")
     public ArrayList<Equipo> buscarPorGrupo(@Param("grupo") String grupo);
     
-    //esta query estaba mal 
-//          @Query("SELECT c FROM Equipo c WHERE c.grupo = :grupo ORDER BY c.puntaje")
-//    public Equipo buscarPorGrupo(@Param("grupo") String grupo); //Esto no tendría que devolver una lista y no solo un equipo??
-    
     @Query("SELECT c.id FROM Equipo c WHERE c.fase = 'ganador' ") //Chequear esta QUERY CUANDO TENGAMOS LAS VISTAS O CARGADA LA BD
     public Integer getIdGanador();
     

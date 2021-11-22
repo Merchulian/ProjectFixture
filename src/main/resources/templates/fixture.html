@@ -32,10 +32,12 @@
         </nav>
     </header>
     <main>
-
+        <br>
+        <p th:if="${session.usuariosession != null}" th:text="'Fixture de ' +${session.usuariosession.nombre}"></p>
         <div class="container-calendario">
             <h2>Calendario-Fase de Grupos <img src="assets/images/calendar-interface-symbol-tool.png" alt=""
                     width="40px" height="40px"> </h1>
+                
                             <!--        vista de la fase de grupos             -->               
                   <!--            ====    GRUPO A    ====                     -->        
         <div class="Grupo-A">            
@@ -43,14 +45,14 @@
             
             
             <div class="Partidos">     <!-- partidoGrupo id = 1--> 
-                <form action="/fixture/definir-partido?id=1" method="POST">
+                <form action="/fixture/definir-partido" method="POST">
                 <input type="hidden" name ="id" th:value="1" >
                 
                 <p class="Horarios">18:00 - 16/11</p>
                 <!--equipo 1  -->
                 <span class="Paises">
                     <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Rusia
-                    <input type="number" name="golesEquipo1" th:value="${golesEquipo1}" min="0" max="9" class="Input-N">
+                    <input type="number" name="golesEquipo1" th:value="${golesEquipo1_1}" min="0" max="9" class="Input-N">
                 </span>
                     
                  <span class="Paises" style="font-weight: bold;">
@@ -59,7 +61,7 @@
                 
                 <!--equipo 2  -->
                 <span class="Paises">
-                    <input type="number" name="golesEquipo2" th:value="${golesEquipo2}" min="0" max="9" class="Input-N"> Arabia Saudita 
+                    <input type="number" name="golesEquipo2" th:value="${golesEquipo2_1}" min="0" max="9" class="Input-N"> Arabia Saudita 
                     <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
                 </span>
                 <button type="submit" class="btn-outline-secondary">Guardar</button>    
@@ -67,17 +69,17 @@
             </div>
     
             <div class="Partidos">
-                <form action="/fixture/definir-partido?id=2" method="POST" id="2" >
+                <form action="/fixture/definir-partido" method="POST" id="2" >
                 <input type="hidden" name ="id" th:value="2" >    
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
                     <img src="assets/images/argentina.png" alt="" width="25px" height="25px"> Egipto
-                        <input type="number" name="golesEquipo1" th:value="${golesEquipo1}" min="0" max="9" class="Input-N"></span>
+                        <input type="number" name="golesEquipo1" th:value="${golesEquipo1_2}" min="0" max="9" class="Input-N"></span>
                             <span class="Paises" style="font-weight: bold;">
                                 <img src="assets/images/vs.png" alt="" width="60px" height="60px">
                             </span>
                    <span class="Paises">
-                       <input type="number" name="golesEquipo2" th:value="${golesEquipo2}" min="0" max="9" class="Input-N"> Uruguay 
+                       <input type="number" name="golesEquipo2" th:value="${golesEquipo2_2}" min="0" max="9" class="Input-N"> Uruguay 
                        <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
                    </span>
             <button type="submit">Guardar</button>
@@ -294,7 +296,7 @@
             
             <div class="Partidos">
             <form action="/fixture/definir-partido?id=12" method="POST" id="12">
-                <input type="hidden" name ="id" th:value="12">
+                
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
                     <img src="assets/images/argentina.png" alt="" width="25px" height="25px">España 
