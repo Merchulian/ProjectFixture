@@ -104,7 +104,7 @@ public class PortalControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @GetMapping("/fixture")
-   public String fixture(ModelMap model , HttpSession session) throws ErrorServicio {
+   public String fixture(ModelMap model , HttpSession session,@RequestParam(required = false) String msg) throws ErrorServicio {
 	Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         
         
@@ -129,26 +129,54 @@ public class PortalControlador {
             
             partidoGrupoServicio.definirCuartos(idFixture);
             // me traigo la lista con los cuartos de final y los muestro en la pantalla:
-            List<PartidoEliminatorio> listaE = fixture.getListaPartidosEliminatorio();
-                for (Integer i = 1; i <=4; i++) {
+            for (Integer i = 1; i <=4; i++) {
                 PartidoEliminatorio pe = partidoEliminatorioServicio.traerPartido(idFixture, i.toString());
                 model.put("pe"+i.toString()+"Eq1", pe.getEquipo1().getPais()  );
                 model.put("golesPe"+i.toString()+"Eq1", pe.getGolesEquipo1());
                 model.put("pe"+i.toString()+"Eq2" , pe.getEquipo2().getPais()  );
-                model.put("golesPe"+i.toString()+"Eq2", pe.getGolesEquipo1());
-                
+                model.put("golesPe"+i.toString()+"Eq2", pe.getGolesEquipo2());
+
+                }
+            if(msg != ""){
+                model.put("msg", msg);
+            }
+                if(partidoEliminatorioServicio.cuartosCompletada(idFixture)){
+                    partidoEliminatorioServicio.definirCuartos(idFixture);
+                    PartidoEliminatorio pe5= partidoEliminatorioServicio.traerPartido(idFixture, "5");
+                    PartidoEliminatorio pe6 =partidoEliminatorioServicio.traerPartido(idFixture, "6");
+                    
+                    
+                    model.put("semi1Eq1", pe5.getEquipo1().getPais());
+                    model.put("semi1Eq2", pe5.getEquipo2().getPais());
+                    model.put("semi2Eq1", pe6.getEquipo1().getPais());
+                    model.put("semi2Eq2", pe6.getEquipo2().getPais());
+                    
+                    if(pe5.getGolesEquipo1() != null && pe5.getGolesEquipo2() != null){
+                        model.put("golesSemi1Eq1" , pe5.getGolesEquipo1());
+                        model.put("golesSemi1Eq2" , pe5.getGolesEquipo2());
+                    }
+                    if(pe6.getGolesEquipo1() != null && pe6.getGolesEquipo2() != null){ 
+                        model.put("golesSemi2Eq1" , pe6.getGolesEquipo1());
+                        model.put("golesSemi2Eq2" , pe6.getGolesEquipo2());
+                    }
+                    if(partidoEliminatorioServicio.semisCompletada(idFixture)){
+                        
+                           
+                    model.put("finalEq1", partidoEliminatorioServicio.definirGanador(pe5).getPais());
+                    model.put("finalEq2", partidoEliminatorioServicio.definirGanador(pe6).getPais());
+                        
+                    }
                 }
 
             //aca van unos model.put para mostrar la info de cuartos
             //if(partidoEliminatorio.cuartosCompleatdos()){ definirSemis() y model.put}
             //if(semisCompletadas){partidoEliminatorio.definirFinal() y model.put()}
-            
-            
+
             }else{System.out.println("todavia falta rellenar partidos de fase de grupos");}
 
             return "fixture.html";
         }else{
-            return "redirect:/index";}
+            return "redirect:/";}
     }
    
    
