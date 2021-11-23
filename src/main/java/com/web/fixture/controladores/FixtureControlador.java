@@ -74,7 +74,7 @@ public class FixtureControlador {
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
     @PostMapping("/definir-cuartos")
     /*deben estar precargados los 4 partidos con goles para continuar*/
-    public String definirCuartos(HttpSession session, ModelMap model ,@RequestParam Integer golesPe1Eq1 ,@RequestParam Integer golesPe1Eq2,@RequestParam Integer golesPe2Eq1 ,@RequestParam Integer golesPe2Eq2 , @RequestParam Integer golesPe3Eq1 ,@RequestParam Integer golesPe3Eq2 , @RequestParam Integer golesPe4Eq1 ,@RequestParam Integer golesPe4Eq2) throws ErrorServicio {
+    public String definirCuartos(HttpSession session, ModelMap model ,@RequestParam(required =false) Integer golesPe1Eq1 ,@RequestParam(required =false) Integer golesPe1Eq2,@RequestParam(required =false) Integer golesPe2Eq1 ,@RequestParam(required =false) Integer golesPe2Eq2 , @RequestParam(required =false) Integer golesPe3Eq1 ,@RequestParam(required =false) Integer golesPe3Eq2 , @RequestParam(required =false) Integer golesPe4Eq1 ,@RequestParam(required =false) Integer golesPe4Eq2) throws ErrorServicio {
         /*Recupero la session del usuario logueado*/
         Usuario usuario = (Usuario) session.getAttribute("usuariosession");
         //Traer el fixture del usuario
@@ -154,7 +154,12 @@ public class FixtureControlador {
     
     }
     //                         ====    guardar Formularios de Finales   ====
-    
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
+    @PostMapping("/definir-final") 
+    public String definirSemis(HttpSession session, ModelMap model ,@RequestParam(required = false) Integer finalGolesEq1 ,@RequestParam(required = false) Integer finalGolesEq2){
+        /*logica del ganador*/
+        
+        return "redirect:/fixture";}
     
     @GetMapping("/guardar")
     public String guardar(ModelMap model, @RequestParam Integer idPartido, @RequestParam String letraID, @RequestParam Integer goles1, @RequestParam Integer goles2, Integer complementario1, Integer complementario2, Integer penales1, Integer penales2) throws ErrorServicio {
