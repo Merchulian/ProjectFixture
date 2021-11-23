@@ -6,7 +6,11 @@
 package com.web.fixture.servicios;
 
 import com.web.fixture.entidades.Equipo;
+import com.web.fixture.entidades.ListaEquipos;
+import com.web.fixture.errores.ErrorServicio;
 import com.web.fixture.repositorios.EquipoRepositorio;
+import com.web.fixture.repositorios.ListaEquipoRepositorio;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,24 @@ public class EquipoServicio {
 
     @Autowired
     private EquipoRepositorio equipoRep;
+    private ListaEquipoRepositorio listaRep;
+    
+    
+    
+    public Equipo crearEquipo(Integer id , String fixtureId) throws ErrorServicio{
+        //el id es para traerme la info correspondiente de la lista
+        Optional<ListaEquipos> rta;
+        rta = listaRep.findById(id);
+        if(rta.isPresent()){
+            ListaEquipos item = rta.get();
+            Equipo equipo = new Equipo();
+            equipo.setPais(item.getPais());
+            equipo.setGrupo(item.getGrupo());
+            return equipo;
+        }else{
+            throw new ErrorServicio("No se pudo crear el equipo");
+        }
+    }
     
     public void estadisticaPartido(Equipo equipo1, Equipo equipo2, Integer golesEquipo1, Integer golesEquipo2) {
 

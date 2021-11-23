@@ -1,3 +1,6 @@
+/*clase que sirve para guardar la info de los equipos, luego cada fizture posee }
+una lista propia de equipos con sus puntajes etc*/
+
 package com.web.fixture.entidades;
 
 import java.util.Date;
@@ -9,7 +12,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Equipo {
-
 
     @Id
     @GeneratedValue
@@ -23,135 +25,104 @@ public class Equipo {
     private Integer puntaje;
     private Integer golesFavor;
     private Integer golesContra;
-//    private Integer diferenciaGoles;
-
+    
+    // Este numero coincide con el id de los equipos listados
+    private Integer numeroEquipo;
+    
     private String fase;
     private String grupo;
 
+//  Constructores
 
-    /**
-     * @return the idEquipo
-     */
+    public Equipo() {
+    }
+
+    public Equipo(String pais, String grupo, String fixtureId) {
+        this.pais = pais;
+        this.grupo = grupo;
+    }
+    
+    
+    
+    //Getters
     public Integer getIdEquipo() {
         return idEquipo;
     }
 
-    /**
-     * @param idEquipo the idEquipo to set
-     */
-    public void setIdEquipo(Integer idEquipo) {
-        this.idEquipo = idEquipo;
-    }
 
-    /**
-     * @return the pais
-     */
     public String getPais() {
         return pais;
     }
 
-    /**
-     * @param pais the pais to set
-     */
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    /**
-     * @return the baja
-     */
     public Date getBaja() {
         return baja;
     }
 
-    /**
-     * @param baja the baja to set
-     */
-    public void setBaja(Date baja) {
-        this.baja = baja;
-    }
-
-    /**
-     * @return the puntaje
-     */
     public Integer getPuntaje() {
         return puntaje;
     }
 
-    /**
-     * @param puntaje the puntaje to set
-     */
-    public void setPuntaje(Integer puntaje) {
-        this.puntaje = puntaje;
-    }
-
-    /**
-     * @return the golesFavor
-     */
     public Integer getGolesFavor() {
         return golesFavor;
     }
 
-    /**
-     * @param golesFavor the golesFavor to set
-     */
-    public void setGolesFavor(Integer golesFavor) {
-        this.golesFavor = golesFavor;
-    }
-
-    /**
-     * @return the golesContra
-     */
     public Integer getGolesContra() {
         return golesContra;
     }
-
-    /**
-     * @param golesContra the golesContra to set
-     */
-    public void setGolesContra(Integer golesContra) {
-        this.golesContra = golesContra;
+    
+    public Integer getNumeroEquipo(){
+        return numeroEquipo;
     }
-
-//    /**
-//     * @return the diferenciaGoles
-//     */
-//    public Integer getDiferenciaGoles() {
-//        return diferenciaGoles;
-//    }
-//
-//    /**
-//     * @param diferenciaGoles the diferenciaGoles to set
-//     */
-//    public void setDiferenciaGoles(Integer diferenciaGoles) {
-//        this.diferenciaGoles = diferenciaGoles;
-//    }
-
-    /**
-     * @return the fase
-     */
+    
     public String getFase() {
         return fase;
     }
 
-    /**
-     * @param fase the fase to set
-     */
-    public void setFase(String fase) {
-        this.fase = fase;
-    }
-    
-    /**
-     * @return the grupo
-     */
     public String getGrupo() {
         return grupo;
     }
 
-    /**
-     * @param grupo the grupo to set
-     */
+    // Setters
+    public void setIdEquipo(Integer idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public void setBaja(Date baja) {
+        this.baja = baja;
+    }
+
+    public void setPuntaje(Integer puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public void setGolesFavor(Integer golesFavor) {
+        this.golesFavor = golesFavor;
+    }
+
+    public void setGolesContra(Integer golesContra) {
+        this.golesContra = golesContra;
+    }
+
+    public void setNumeroEquipo(Integer numeroEuipo){
+        this.numeroEquipo = numeroEquipo;
+    }
+    
+    public void setFase(String fase) {
+        this.fase = fase;
+    }
+
     public void setGrupo(String grupo) {
         this.grupo = grupo;
     }
+
+    @Override
+    public String toString() {
+        return "Equipo{" + "idEquipo=" + idEquipo + ", pais=" + pais + ", fase=" + fase + ", grupo=" + grupo + '}';
+    }
+
+   
 }

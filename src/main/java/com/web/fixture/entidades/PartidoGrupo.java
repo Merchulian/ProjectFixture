@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import com.web.fixture.entidades.Equipo;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
@@ -21,10 +20,10 @@ public class PartidoGrupo {
     private Integer idPartido;
     
     @ManyToOne
-    private Equipo equipo1;
+    private ListaEquipos equipo1;
     
     @ManyToOne
-    private Equipo equipo2;
+    private ListaEquipos equipo2;
     
     // cambiado el tipo a DATE
     @Temporal(TemporalType.DATE)
@@ -45,82 +44,119 @@ public class PartidoGrupo {
     public PartidoGrupo() {
     }
 
-    public PartidoGrupo(Integer idPartido, Equipo equipo1, Equipo equipo2, Date fecha, String grupo, String tag, Integer golesEquipo1, Integer golesEquipo2) {
-        this.idPartido = idPartido;
-        this.equipo1 = equipo1;
-        this.equipo2 = equipo2;
-        this.fecha = fecha;
-        this.grupo = grupo;
-        this.tag = tag;
-        this.golesEquipo1 = golesEquipo1;
-        this.golesEquipo2 = golesEquipo2;
-    }
 // Getters
 
+    /**
+     * @return the idPartido
+     */
     public Integer getIdPartido() {
         return idPartido;
     }
 
-    public Equipo getEquipo1() {
+    /**
+     * @return the equipo1
+     */
+    public ListaEquipos getEquipo1() {
         return equipo1;
     }
 
-    public Equipo getEquipo2() {
+    /**
+     * @return the equipo2
+     */
+    public ListaEquipos getEquipo2() {
         return equipo2;
     }
 
+    /**
+     * @return the fecha
+     */
     public Date getFecha() {
         return fecha;
     }
 
+    /**
+     * @return the grupo
+     */
     public String getGrupo() {
         return grupo;
     }
 
+    /**
+     * @return the tag
+     */
     public String getTag() {
         return tag;
     }
 
+    /**
+     * @return the golesEquipo1
+     */
     public Integer getGolesEquipo1() {
         return golesEquipo1;
     }
 
+    /**
+     * @return the golesEquipo2
+     */
     public Integer getGolesEquipo2() {
         return golesEquipo2;
     }
 
-//  Setters
-
+    /**
+     * @param idPartido the idPartido to set
+     */
     public void setIdPartido(Integer idPartido) {
         this.idPartido = idPartido;
     }
 
-    public void setEquipo1(Equipo equipo1) {
+    /**
+     * @param equipo1 the equipo1 to set
+     */
+    public void setEquipo1(ListaEquipos equipo1) {
         this.equipo1 = equipo1;
     }
 
-    public void setEquipo2(Equipo equipo2) {
+    /**
+     * @param equipo2 the equipo2 to set
+     */
+    public void setEquipo2(ListaEquipos equipo2) {
         this.equipo2 = equipo2;
     }
 
+    /**
+     * @param fecha the fecha to set
+     */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * @param grupo the grupo to set
+     */
     public void setGrupo(String grupo) {
         this.grupo = grupo;
     }
 
+    /**
+     * @param tag the tag to set
+     */
     public void setTag(String tag) {
         this.tag = tag;
     }
 
+    /**
+     * @param golesEquipo1 the golesEquipo1 to set
+     */
     public void setGolesEquipo1(Integer golesEquipo1) {
         this.golesEquipo1 = golesEquipo1;
     }
 
+    /**
+     * @param golesEquipo2 the golesEquipo2 to set
+     */
     public void setGolesEquipo2(Integer golesEquipo2) {
         this.golesEquipo2 = golesEquipo2;
     }
 
+ 
 }

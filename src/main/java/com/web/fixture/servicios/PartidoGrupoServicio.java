@@ -9,6 +9,7 @@ import com.web.fixture.entidades.Equipo;
 import com.web.fixture.entidades.Fixture;
 import com.web.fixture.entidades.PartidoGrupo;
 import com.web.fixture.errores.ErrorServicio;
+import com.web.fixture.repositorios.EquipoRepositorio;
 import com.web.fixture.repositorios.FixtureRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,37 +28,37 @@ public class PartidoGrupoServicio {
     private EquipoServicio equipoServicio;
     @Autowired
     private FixtureRepositorio fixtureRepositorio;
+    @Autowired
+    private EquipoRepositorio equipoRepositorio;
     
 //             ====    Traer un partidoGrupo de un fixture existente   ==== 
-    public PartidoGrupo traerPartido(String idFixture , String idPartido) throws ErrorServicio{
+    public PartidoGrupo traerPartido(String idFixture , String tagPartido) throws ErrorServicio{
         Fixture fixture = fixtureRepositorio.getById(idFixture);
         PartidoGrupo partido = new PartidoGrupo();
         List<PartidoGrupo> lista = fixture.getListaPartidosGrupos();
         for (PartidoGrupo partidoGrupo : lista) {
-            if(partidoGrupo.getTag().equals(idPartido)){
+            if(partidoGrupo.getTag().equals(tagPartido)){
                 partido = partidoGrupo;
                 break;
             }
         }
-        System.out.println("Me traje el partido nro: " + partido.getTag());
         return partido;
 
     }
 //                 ====    Guardar un Partido    ====
     @Transactional
-    public void guardarPartido(String fixtureId ,String idPartido ,Integer golesEquipo1,Integer golesEquipo2) throws ErrorServicio{
+    public void guardarPartido(String fixtureId ,String tagPartido ,Integer golesEquipo1,Integer golesEquipo2) throws ErrorServicio{
         try{
-            System.out.println("has ingresado golesEquipo1: " + golesEquipo1);
-            System.out.println("has ingresado golesEquipo2: " + golesEquipo2);
             
-        PartidoGrupo partido = traerPartido(fixtureId, idPartido);
-        partido.setGolesEquipo1(golesEquipo1);
-        partido.setGolesEquipo2(golesEquipo2);
-        System.out.println("goles equipo 1: " + partido.getEquipo1());
-        System.out.println("goles equipo 2: " + partido.getEquipo2());
-        /*persistir los datos cargados*/
-        partidoGrupoRepositorio.save(partido);
-        System.out.println("partido "+partido.getIdPartido()+ " guardado!!!");
+            // traigo el partido correspondiente    
+            PartidoGrupo partido = traerPartido(fixtureId, tagPartido);
+            System.out.println("partido traido!!" + partido.getTag() + " || " + partido.getEquipo1() + " || " + partido.getEquipo2() + " || " + partido.getIdPartido());
+            partido.setGolesEquipo1(golesEquipo1);
+            partido.setGolesEquipo2(golesEquipo2);
+            partidoGrupoRepositorio.save(partido);
+            
+            // guardar estadisticas equipo
+            //guardarEstadisticas(golesEquipo1 , golesEquipo2 ,tagPartido, fixtureId);
         }catch(ErrorServicio ex){
         ex.getMessage();
         }
@@ -65,41 +66,44 @@ public class PartidoGrupoServicio {
     }
     
     
-    
-//                  ====    Definir Partido    ====
-@Transactional        
-    public void definirPartido(Integer golesEquipo1, Integer golesEquipo2, Integer idPartido) throws ErrorServicio {
+// =============================================================================    
+//           ====    guardar los puntos de la fase de grupos    ====
+// =============================================================================    
+//@Transactional        
+//public void guardarEstadisticas(Integer golesEquipo1, Integer golesEquipo2, String idPartido , String fixtureId) throws ErrorServicio {
 
-        validar(golesEquipo1, golesEquipo2, idPartido);
+       // validar(golesEquipo1, golesEquipo2, idPartido);
 
-        Optional<PartidoGrupo> demo = partidoGrupoRepositorio.findById(idPartido);
+        //Optional<PartidoGrupo> demo = partidoGrupoRepositorio.findById(idPartido);
 
-        if (demo.isPresent()) {
-            PartidoGrupo partido = demo.get();
+        //if (demo.isPresent()) {
+          //  PartidoGrupo partido = demo.get();
 
-            if (golesEquipo1 > golesEquipo2) { //si gana por goles equipo 1, suma 3 puntos a su puntaje
+            //if (golesEquipo1 > golesEquipo2) { //si gana por goles equipo 1, suma 3 puntos a su puntaje
 
-                partido.getEquipo1().setPuntaje(partido.getEquipo1().getPuntaje() + 3);
+                //partido.getEquipo1().setPuntaje(partido.getEquipo1().getPuntaje() + 3);
 
-            } else if (golesEquipo1 < golesEquipo2) { //si gana por goles equipo 2, suma 3 puntos a su puntaje
+            //} else if (golesEquipo1 < golesEquipo2) { //si gana por goles equipo 2, suma 3 puntos a su puntaje
 
-                partido.getEquipo2().setPuntaje(partido.getEquipo2().getPuntaje() + 3);
+               // partido.getEquipo2().setPuntaje(partido.getEquipo2().getPuntaje() + 3);
 
-            } else { //si ninguno gana, es que empataron, suman 1 pto cada uno
+            //} else { //si ninguno gana, es que empataron, suman 1 pto cada uno
 
-                partido.getEquipo1().setPuntaje(partido.getEquipo1().getPuntaje() + 1);
-                partido.getEquipo2().setPuntaje(partido.getEquipo2().getPuntaje() + 1);
-            }
+               // partido.getEquipo1().setPuntaje(partido.getEquipo1().getPuntaje() + 1);
+               // partido.getEquipo2().setPuntaje(partido.getEquipo2().getPuntaje() + 1);
+            //}
 
-            equipoServicio.estadisticaPartido(partido.getEquipo1(), partido.getEquipo2(), golesEquipo1, golesEquipo2);
-            partidoGrupoRepositorio.save(partido);
+           // equipoServicio.estadisticaPartido(partido.getEquipo1(), partido.getEquipo2(), golesEquipo1, golesEquipo2);
+          //  partidoGrupoRepositorio.save(partido);
 
-        } else {
-            throw new ErrorServicio("El partido no se encuentra en la base de datos.");
-        }
+        //} else {
+          //  throw new ErrorServicio("El partido no se encuentra en la base de datos.");
+        //}
 
-    }
-//                             ====    Definir Grupo    ====
+    //}
+// ==============================================================================    
+// =========================    Definir Grupo    ================================
+// ==============================================================================
     public void definirGrupo(String grupo, String idFixture ){
         Optional<Fixture> rta = fixtureRepositorio.findById(idFixture);
         if(rta.isPresent()){

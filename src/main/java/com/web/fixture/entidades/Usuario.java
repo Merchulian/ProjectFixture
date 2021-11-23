@@ -23,149 +23,99 @@ public class Usuario {
     private String apellido;
 
     private String email;
+    
     private String clave;
+    
     @Temporal(TemporalType.DATE)
     private Date alta;
     
     @Temporal(TemporalType.DATE)
     private Date baja;
-    //prueba quitar anotacion
+
     @OneToOne(cascade = {CascadeType.ALL})
     private Fixture fixture;
    
     @OneToOne
     private Foto foto;
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "idUsuario=" + getIdUsuario() + ", nombre=" + getNombre() + ", apellido=" + getApellido() + ", email=" + email + ", alta=" + getAlta() + ", baja=" + getBaja() + ", fixture=" + getFixture() + '}';
-    }
 
-    /**
-     * @return the idUsuario
-     */
+//  Getters
     public String getIdUsuario() {
         return idUsuario;
     }
 
-    /**
-     * @param idUsuario the idUsuario to set
-     */
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    /**
-     * @return the apellido
-     */
     public String getApellido() {
         return apellido;
     }
 
-    /**
-     * @param apellido the apellido to set
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    /**
-     * @return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the alta
-     */
-    public Date getAlta() {
-        return alta;
-    }
-
-    /**
-     * @param alta the alta to set
-     */
-    public void setAlta(Date alta) {
-        this.alta = alta;
-    }
-
-    /**
-     * @return the baja
-     */
-    public Date getBaja() {
-        return baja;
-    }
-
-    /**
-     * @param baja the baja to set
-     */
-    public void setBaja(Date baja) {
-        this.baja = baja;
-    }
-
-    /**
-     * @return the fixture
-     */
-    public Fixture getFixture() {
-        return fixture;
-    }
-
-    /**
-     * @param fixture the fixture to set
-     */
-    public void setFixture(Fixture fixture) {
-        this.fixture = fixture;
-    }
-
-    /**
-     * @return the clave
-     */
     public String getClave() {
         return clave;
     }
 
-    /**
-     * @param clave the clave to set
-     */
+    public Date getAlta() {
+        return alta;
+    }
+
+    public Date getBaja() {
+        return baja;
+    }
+
+    public Fixture getFixture() {
+        return fixture;
+    }
+
+    public Foto getFoto() {
+        return foto;
+    }
+//  Setters
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setClave(String clave) {
         this.clave = clave;
     }
 
-    /**
-     * @return the foto
-     */
-    public Foto getFoto() {
-        return foto;
+    public void setAlta(Date alta) {
+        this.alta = alta;
     }
 
-    /**
-     * @param foto the foto to set
-     */
+    public void setBaja(Date baja) {
+        this.baja = baja;
+    }
+
+    public void setFixture(Fixture fixture) {
+        this.fixture = fixture;
+    }
+
     public void setFoto(Foto foto) {
         this.foto = foto;
     }
-
     
+    // TO String
+    @Override
+    public String toString() {
+        return "Usuario{" + "idUsuario=" + getIdUsuario() + ", nombre=" + getNombre() + ", apellido=" + getApellido() + ", email=" + getEmail() + ", alta=" + getAlta() + ", baja=" + getBaja() + ", fixture=" + getFixture() + '}';
+    }
+
 }

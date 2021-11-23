@@ -1,4 +1,5 @@
 /*partidos Eliminatorios*/
+create database fixtureweb;
 select * from calendario_eliminatorio;
 /*Cuartos*/
 insert INTO calendario_eliminatorio (id_partido , fase , fecha , tag , equipo1_id_equipo, equipo2_id_equipo) values (1 , "Cuartos" , '2021-11-29' , "AB", null , null);

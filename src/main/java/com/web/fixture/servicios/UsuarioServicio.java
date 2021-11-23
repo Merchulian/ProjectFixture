@@ -45,27 +45,30 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String apellido, String email, String clave, String clave2) throws ErrorServicio {
         
-        //IMPORTANTE HACER ESTO
-        //falta la validacion de email, que no se pueda registrar una persona con un email ya registrado.
+        Usuario verSiExiste = usuarioRepositorio.buscarPorMail(email);
+        if(verSiExiste == null){
         
-        validar(nombre, apellido, email, clave, clave2);
+            validar(nombre, apellido, email, clave, clave2);
+            
+            Usuario usuario = new Usuario(); //Creamos un objeto usuario
+            usuario.setNombre(nombre); // lo llenamos con los datos que nos llega del registro web
+            usuario.setApellido(apellido);
+            usuario.setEmail(email);
 
-        Usuario usuario = new Usuario(); //Creamos un objeto usuario
-        usuario.setNombre(nombre); // lo llenamos con los datos que nos llega del registro web
-        usuario.setApellido(apellido);
-        usuario.setEmail(email);
-
-        String encriptada = new BCryptPasswordEncoder().encode(clave);
-        usuario.setClave(encriptada);
-        usuario.setAlta(new Date()); 
-        String idUsuario = usuario.getIdUsuario();
-        Foto foto = fotoServicio.guardar(archivo);
-        usuario.setFoto(foto);
-        usuario.setFixture(fixtureServicio.creaFixture(idUsuario));
-       // usuarioRepositorio.save(usuario); //Le decimos al repositorio que lo guarde en la base de datos. El repositorio es el encargado de transformar ese objeto en una o más tablas de la base de datos
-       
-        
-        usuarioRepositorio.save(usuario);
+            String encriptada = new BCryptPasswordEncoder().encode(clave);
+            usuario.setClave(encriptada);
+            usuario.setAlta(new Date()); 
+            String idUsuario = usuario.getIdUsuario();
+            Foto foto = fotoServicio.guardar(archivo);
+            usuario.setFoto(foto);
+            //creacion del fixture
+            Fixture fixture = fixtureServicio.creaFixture(idUsuario);
+            usuario.setFixture(fixture);
+            //persisto el usuario
+            usuarioRepositorio.save(usuario);
+        }else{
+        throw new ErrorServicio("El usuario ya existe!!");
+        }
     }
     
     //ESTO ES PARA QUE UN USUARIO LOGUEADO SOLO PUEDE MODIFICAR SUS DATOS

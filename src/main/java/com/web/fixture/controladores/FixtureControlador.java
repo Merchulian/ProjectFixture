@@ -39,36 +39,21 @@ public class FixtureControlador {
     @Autowired
     private PartidoEliminatorioServicio partidoEliminatorioServicio;
     
-   //@GetMapping("/")
-   //@PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
-    //public String fixture(HttpSession session, ModelMap model) {
-        /*Rescato la sesdion del usuario*/
-      //  Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-       // Fixture fixture = usuario.getFixture();
-       // model.put("golesEquipo1_1",9);
-       // model.put("golesEquipo2_1",9);
-
-        //de la db rescato la info de los partidos guardada y la pongo en el document
-        //return "fixture.html";
-    //}
-
+//             ====    guardar formularios de los partidos    ====
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
     @PostMapping("/definir-partido")
     /*depende cual boton aprieto, llega como id el del partido y a partir de alli guardo el partido*/
     public String definirPartido(HttpSession session, ModelMap model ,@RequestParam String id ,@RequestParam Integer golesEquipo1,@RequestParam Integer golesEquipo2) throws ErrorServicio {
-        System.out.println("id: " + id);
         /*Recupero la session del usuario logueado*/
         try{
             Usuario usuario = (Usuario) session.getAttribute("usuariosession");
-            System.out.println("el id del Usuario es " + usuario.getIdUsuario());
-            
-            System.out.println("idFixture :" + usuario.getFixture().getId());
+
     /*Traer el fixture del usuario*/
     
             Fixture fixture = usuario.getFixture();
-            System.out.println("idFixture:" + fixture.getId());
+            //System.out.println("idFixture:" + fixture.getId());
     /*modificar el partido que corresponde, segun el id*/
-        partidoGrupoSevicio.guardarPartido(fixture.getId() , id , golesEquipo1, golesEquipo2);
+        partidoGrupoSevicio.guardarPartido(fixture.getId() , id /*id del usuario*/, golesEquipo1, golesEquipo2);
         }catch(ErrorServicio e){
         e.getMessage();
         }finally{
@@ -82,7 +67,7 @@ public class FixtureControlador {
         
         try {
             
-            partidoEliminatorioServicio.guardarPartido(idPartido, letraID, goles1, goles2, complementario1, complementario2, penales1, penales2);
+           // partidoEliminatorioServicio.guardarPartido(idPartido, letraID, goles1, goles2, complementario1, complementario2, penales1, penales2);
             
             
             return "fixture.html";

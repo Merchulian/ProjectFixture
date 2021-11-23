@@ -2,6 +2,7 @@
 package com.web.fixture.repositorios;
 
 import com.web.fixture.entidades.Equipo;
+import com.web.fixture.entidades.ListaEquipos;
 import java.util.ArrayList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface EquipoRepositorio  extends JpaRepository<Equipo, Integer>{
+public interface ListaEquipoRepositorio  extends JpaRepository<ListaEquipos, Integer>{
    
-    
+    /*
     @Query("SELECT c FROM Equipo c WHERE c.grupo = :grupo ORDER BY c.puntaje DESC, c.golesFavor DESC")
     public ArrayList<Equipo> buscarPorGrupo(@Param("grupo") String grupo);
     
@@ -21,5 +22,5 @@ public interface EquipoRepositorio  extends JpaRepository<Equipo, Integer>{
     
         @Query("SELECT c FROM Equipo c WHERE c.fase = :fase")
     public ArrayList<Equipo> buscarPorFase(@Param("fase") String fase);
-    
+    */
 }

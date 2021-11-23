@@ -4,6 +4,7 @@ import com.web.fixture.entidades.CalendarioEliminatorio;
 import com.web.fixture.entidades.CalendarioGrupo;
 import com.web.fixture.entidades.Equipo;
 import com.web.fixture.entidades.Fixture;
+import com.web.fixture.entidades.ListaEquipos;
 import com.web.fixture.entidades.PartidoEliminatorio;
 import com.web.fixture.entidades.PartidoGrupo;
 import com.web.fixture.errores.ErrorServicio;
@@ -11,11 +12,11 @@ import com.web.fixture.repositorios.CalendarioEliminatorioRepositorio;
 import com.web.fixture.repositorios.CalendarioGrupoRepositorio;
 import com.web.fixture.repositorios.EquipoRepositorio;
 import com.web.fixture.repositorios.FixtureRepositorio;
+import com.web.fixture.repositorios.ListaEquipoRepositorio;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.web.fixture.repositorios.PartidoGrupoRepositorio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -29,43 +30,72 @@ public class FixtureServicio {
     private CalendarioGrupoRepositorio calendarioGrupoRep;
     @Autowired
     private FixtureRepositorio fixtureRepositorio;
-
+    @Autowired
+    private EquipoServicio equipoServicio;
     @Autowired
     private EquipoRepositorio equipoRepositorio;
+    @Autowired
+    private ListaEquipoRepositorio listaEquiposRepositorio;
 
     @Transactional
     public Fixture creaFixture(String idUsuario) throws ErrorServicio {
 
-        //traigo todos los datos del calendario para crear automaticamente el fixture
+        //traigo todos los datos del calendario para rellenar los datos fijos de
+        // los partidos y los equipos
+
         List<CalendarioGrupo> listaGrupo = calendarioGrupoRep.findAll();
         List<CalendarioEliminatorio> listaEliminatorio = calendarioEliminatorioRep.findAll();
-        
-        // armo una lista para los partidos de grupo y los eliminatorios
+        List<ListaEquipos> listaEquipos = listaEquiposRepositorio.findAll();
+        Fixture fixture = new Fixture();
+        //
+        for (ListaEquipos listaEquipo : listaEquipos) {
+            listaEquipo.toString();    
+        }
+        //
+        //En estas listas guardo los datos
         List<PartidoGrupo> listaPartidoGrupo = new ArrayList();
         List<PartidoEliminatorio> listapartidoEliminatorio = new ArrayList();
+        List<Equipo> equiposfixture = new ArrayList();
+        
+        //creacionb de listas de equipos
+        
+        for (ListaEquipos item : listaEquipos) {
+            Equipo equipo = new Equipo();
+            equipo.setPais(item.getPais());
+            equipo.setGrupo(item.getGrupo());
+            
+            equipo.setNumeroEquipo(item.getIdEquipo());
+            equiposfixture.add(equipo);
+            equipoRepositorio.save(equipo);
+            System.out.println(equipo.toString());
+        }
+        
+        fixture.setListaEquipos(equiposfixture);
+        
+        
+  // armo los partidos de grupo
         for (CalendarioGrupo cGrupo : listaGrupo ) {
             PartidoGrupo pg = new PartidoGrupo();
-            pg.setEquipo1(cGrupo.getEquipo1());
-            pg.setEquipo2(cGrupo.getEquipo2());
             pg.setFecha((Date) cGrupo.getFecha());
             pg.setTag(cGrupo.getIdPartGrupo().toString());
             pg.setGrupo(cGrupo.getGrupo());
+            //armo los equipos a partir de ListaEquipos
+            pg.setEquipo1(cGrupo.getEquipo1());
+            pg.setEquipo2(cGrupo.getEquipo2());
             listaPartidoGrupo.add(pg);
-        }
+            }
+
+        //  armo los partidos eliminatorios   
         for (CalendarioEliminatorio cEliminatorio : listaEliminatorio) {
             PartidoEliminatorio pe = new PartidoEliminatorio();
-            
             pe.setFecha((Date) cEliminatorio.getFecha());
             pe.setLetraID(cEliminatorio.getIdPartido().toString());
             pe.setFase(cEliminatorio.getFase());
             listapartidoEliminatorio.add(pe);
         }
-        
-        Fixture fixture = new Fixture();
+
         fixture.setListaPartidosGrupos(listaPartidoGrupo);
         fixture.setListaPartidosEliminatorio(listapartidoEliminatorio); //Al tener dos entidades diferentes hay que setear 
-
-        fixtureRepositorio.save(fixture);
         return fixture;
     }
 
@@ -126,6 +156,20 @@ public class FixtureServicio {
             System.out.println("el ID del partido es nulo.");
             throw new ErrorServicio("Error interno.");
         }
+     }
+     
+//   ====    Buscar un equipo dentro de la lista de equipos del fixture    =====
+     
+     public Equipo buscarEquipoPorNumeroEquipo(Integer numeroEquipo, Fixture fixture){
+         List<Equipo> lista = fixture.getListaEquipos();
+         Equipo equipo = null;
+         for (Equipo item : lista) {
+             if(item.getNumeroEquipo() == numeroEquipo){
+                 equipo = item;
+                 break;
+             }  
+         }
+        return equipo;
      }
 }
 

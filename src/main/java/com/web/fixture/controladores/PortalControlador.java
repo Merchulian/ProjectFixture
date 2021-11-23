@@ -76,7 +76,7 @@ public class PortalControlador {
     }
 
     @PostMapping("/registrar")
-    public String registrar(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String clave1, @RequestParam String clave2) {
+    public String registrar(ModelMap modelo,@RequestParam(required = false) MultipartFile archivo, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String mail, @RequestParam String clave1, @RequestParam String clave2) {
 
         try {
             UsuarioServicio.registrar(archivo, nombre, apellido, mail, clave1, clave2);
@@ -113,17 +113,26 @@ public class PortalControlador {
                 
                 goles1 ="golesEquipo1_" + i;
                 goles2 ="golesEquipo2_" + i;
-                System.out.println(goles1 + "  ||  " + goles2);
                 if(partido.getGolesEquipo1()!=null && partido.getGolesEquipo2() !=null){
                     model.put(goles1 ,partido.getGolesEquipo1());
                     model.put(goles2 , partido.getGolesEquipo2());
                 }
             }
-            //mejorar vista
+            //definir grupo A
+            partidoGrupoServicio.definirGrupo("A", fixture.getId());
+            //definir grupo B
+            partidoGrupoServicio.definirGrupo("B", fixture.getId());
+            //definir grupo C
+            partidoGrupoServicio.definirGrupo("C", fixture.getId());
+            //definir grupo D
+            partidoGrupoServicio.definirGrupo("D", fixture.getId());
+            //definir cuartos
+            // definir semis
+            //definir final y 3y4
             
             return "fixture.html";
         }else{
-            return "redirect:/logout";}
+            return "redirect:/";}
     }
     
 //     A ESTADISTICAS SOLO PODRA INGRESAR UN USUARIO LOGUEADO, DEBIDO QUE LAS MISMAS SE CREAN EN BASE AL FIXTURE COMPLETADO
