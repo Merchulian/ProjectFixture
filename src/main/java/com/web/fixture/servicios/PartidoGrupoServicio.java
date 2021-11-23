@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.transaction.Transactional;
+import org.springframework.data.repository.query.Param;
 
 @Service
 public class PartidoGrupoServicio {
@@ -70,13 +71,13 @@ public class PartidoGrupoServicio {
     
     
 // =============================================================================    
-//           ====    guardar los puntos de la fase de grupos    ====
+//           ====    METODOS DE DEFINICION DE FASES    ====     
+// ============================================================================= 
+
+// 1) ESTADISTICAS PARA DETERMINAR QUIENES PASAN
     
-    
-    
-//  Esta funcion deberia llamarla al invocar la vista del fixture
-//  que se fije si puede definir los ganadores cada vez que recarga la pagina.    
-// =============================================================================    
+/*  Esta funcion la llamo al invocar la vista del fixture que se fije si puede 
+definir los ganadores cada vez que recarga la pagina. */    
 @Transactional       
 public void guardarEstadisticas(String fixtureId) throws ErrorServicio {
         Fixture fixture = fixtureRepositorio.findById(fixtureId).get();
@@ -133,20 +134,219 @@ public void guardarEstadisticas(String fixtureId) throws ErrorServicio {
                 }else{continue;} //si hay goles nulos...
                 }//end Fore 
                 //en este punto deberia haber acumulado los goles y puntaje de un equipo en poarticular)
-                //guardo esta info en la base de datos:
-                equipo.setGolesFavor(golesFavor);
-                equipo.setGolesContra(golesContra);
-                equipo.setPuntaje(puntaje);
-                System.out.println("3) " + equipo.toString());
-                equipoRepositorio.save(equipo);
+                //guardo esta info en la base de datos solo si estan guardados todos los partidos:
+                
+                    System.out.println("fase de grupos completada");
+                    equipo.setGolesFavor(golesFavor);
+                    equipo.setGolesContra(golesContra);
+                    equipo.setPuntaje(puntaje);
+                    System.out.println("3) " + equipo.toString());
+                    equipoRepositorio.save(equipo);       
             }//end If equipo != null  (sigue con el siguiente equipoS)
-        }
-        
-        
+        }  
     }
+
+// 2)    PASE A CUARTOS
+/*Aca pasan los dos mejores de cada grupo (definen por puntos o por goles)*/
+
+public void definirCuartos(String idFixture){
+    Fixture fixture = fixtureRepositorio.findById(idFixture).get();
+    // veo la lista de equipos y defino quienes son los primeros ganadores de cada grupo
+    List<Equipo> listaCompleta = fixture.getListaEquipos();
+    //para buscar los 4 paises de cada grupo
+    Integer id1;
+    Integer id2;
+    Integer id3;
+    Integer id4;
+    
+    
+  //grupo A:      
+    
+    id1= buscarPorTag(idFixture , "1").getIdEquipo();
+    id2= buscarPorTag(idFixture , "2").getIdEquipo();
+    id3= buscarPorTag(idFixture , "3").getIdEquipo();
+    id4= buscarPorTag(idFixture , "4").getIdEquipo();
+    System.out.println(id1 + "  " + id2 + "  " + id3+ "  " + id4);
+    ArrayList<Equipo> grupoAorden = equipoRepositorio.buscarPorGrupo("A", id1, id2, id3, id4);
+    Equipo equipoA1 =null;
+    Equipo equipoA2 = null;
+    //definir ganadores del grupo A:
+    if(grupoAorden.get(0).getPuntaje()>grupoAorden.get(1).getPuntaje()){
+        equipoA1 =grupoAorden.get(0);
+        if(grupoAorden.get(1).getPuntaje()>grupoAorden.get(2).getPuntaje()){
+            equipoA2 =grupoAorden.get(1);
+        }else if(grupoAorden.get(1).getPuntaje() == grupoAorden.get(2).getPuntaje()){
+            Integer diferencia1= grupoAorden.get(1).getGolesFavor() - grupoAorden.get(1).getGolesContra();
+            Integer diferencia2= grupoAorden.get(2).getGolesFavor() - grupoAorden.get(2).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoA2 = grupoAorden.get(1);
+            }else{equipoA2 = grupoAorden.get(2);}
+                
+            }
+        } else if(grupoAorden.get(0).getPuntaje()==grupoAorden.get(1).getPuntaje()){
+        Integer diferencia1= grupoAorden.get(0).getGolesFavor() - grupoAorden.get(0).getGolesContra();
+            Integer diferencia2= grupoAorden.get(1).getGolesFavor() - grupoAorden.get(1).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoA1 = grupoAorden.get(0);
+                equipoA2 = grupoAorden.get(1);
+            }else{equipoA1 = grupoAorden.get(1);
+                equipoA2 = grupoAorden.get(0);}
+        }//fin Definicion de ganadores
+    System.out.println("ganadores del grupo A: ");
+    System.out.println("equipo1:"+equipoA1.getPais()+ " " + equipoA1.toString());
+    System.out.println("equipo2:"+equipoA2.getPais()+ " " + equipoA2.toString());
+    
+
+    // Definir Grupo B
+       
+    id1= buscarPorTag(idFixture , "5").getIdEquipo();
+    id2= buscarPorTag(idFixture , "6").getIdEquipo();
+    id3= buscarPorTag(idFixture , "7").getIdEquipo();
+    id4= buscarPorTag(idFixture , "8").getIdEquipo();
+    System.out.println(id1 + "  " + id2 + "  " + id3+ "  " + id4);
+    ArrayList<Equipo> grupoBorden = equipoRepositorio.buscarPorGrupo("B", id1, id2, id3, id4);
+    Equipo equipoB1 =null;
+    Equipo equipoB2 = null;
+    //definir ganadores del grupo B:
+    if(grupoBorden.get(0).getPuntaje()>grupoBorden.get(1).getPuntaje()){
+        equipoB1 =grupoBorden.get(0);
+        if(grupoBorden.get(1).getPuntaje()>grupoBorden.get(2).getPuntaje()){
+            equipoB2 =grupoBorden.get(1);
+        }else if(grupoBorden.get(1).getPuntaje() == grupoBorden.get(2).getPuntaje()){
+            Integer diferencia1= grupoBorden.get(1).getGolesFavor() - grupoBorden.get(1).getGolesContra();
+            Integer diferencia2= grupoBorden.get(2).getGolesFavor() - grupoBorden.get(2).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoB2 = grupoBorden.get(1);
+            }else{equipoB2 = grupoBorden.get(2);}
+                
+            }
+        } else if(grupoBorden.get(0).getPuntaje()==grupoBorden.get(1).getPuntaje()){
+        Integer diferencia1= grupoBorden.get(0).getGolesFavor() - grupoBorden.get(0).getGolesContra();
+            Integer diferencia2= grupoBorden.get(1).getGolesFavor() - grupoBorden.get(1).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoB1 = grupoBorden.get(0);
+                equipoB2 = grupoBorden.get(1);
+            }else{equipoB1 = grupoBorden.get(1);
+                  equipoB2 = grupoBorden.get(0);  }
+        }//fin Definicion de ganadores
+    System.out.println("ganadores del grupo B: ");
+    System.out.println("equipo1:"+equipoB1.getPais()+ " " + equipoB1.toString());
+    System.out.println("equipo2:"+equipoB2.getPais()+ " " + equipoB2.toString());
+    
+    //  GRUPO c:  
+    id1= buscarPorTag(idFixture , "9").getIdEquipo();
+    id2= buscarPorTag(idFixture , "10").getIdEquipo();
+    id3= buscarPorTag(idFixture , "11").getIdEquipo();
+    id4= buscarPorTag(idFixture , "12").getIdEquipo();
+    System.out.println(id1 + "  " + id2 + "  " + id3+ "  " + id4);
+    
+    ArrayList<Equipo> grupoCorden = equipoRepositorio.buscarPorGrupo("C", id1, id2, id3, id4);
+    Equipo equipoC1 =null;
+    Equipo equipoC2 = null;
+    
+    
+    //definir ganadores del grupo C:
+    if(grupoCorden.get(0).getPuntaje()>grupoCorden.get(1).getPuntaje()){
+        equipoC1 =grupoCorden.get(0);
+        if(grupoCorden.get(1).getPuntaje()>grupoCorden.get(2).getPuntaje()){
+            equipoC2 =grupoCorden.get(1);
+        }else if(grupoCorden.get(1).getPuntaje() == grupoCorden.get(2).getPuntaje()){
+            Integer diferencia1= grupoCorden.get(1).getGolesFavor() - grupoCorden.get(1).getGolesContra();
+            Integer diferencia2= grupoCorden.get(2).getGolesFavor() - grupoCorden.get(2).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoC2 = grupoCorden.get(1);
+            }else{equipoC2 = grupoCorden.get(2);}
+                
+            }
+        } else if(grupoCorden.get(0).getPuntaje()==grupoCorden.get(1).getPuntaje()){
+        Integer diferencia1= grupoCorden.get(0).getGolesFavor() - grupoCorden.get(0).getGolesContra();
+            Integer diferencia2= grupoCorden.get(1).getGolesFavor() - grupoCorden.get(1).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoC1 = grupoCorden.get(0);
+                equipoC2 = grupoCorden.get(1);
+            }else{equipoC1 = grupoCorden.get(1);
+                  equipoC2 = grupoCorden.get(0);  }
+        }//fin Definicion de ganadores
+    System.out.println("ganadores del grupo C: ");
+    System.out.println("equipo1:"+equipoC1.getPais()+ " " + equipoC1.toString());
+    System.out.println("equipo2:"+equipoC2.getPais()+ " " + equipoC2.toString());
+    
+       //  GRUPO D:  
+    id1= buscarPorTag(idFixture , "13").getIdEquipo();
+    id2= buscarPorTag(idFixture , "14").getIdEquipo();
+    id3= buscarPorTag(idFixture , "15").getIdEquipo();
+    id4= buscarPorTag(idFixture , "16").getIdEquipo();
+    System.out.println(id1 + "  " + id2 + "  " + id3+ "  " + id4);
+    
+    ArrayList<Equipo> grupoDorden = equipoRepositorio.buscarPorGrupo("D", id1, id2, id3, id4);
+    Equipo equipoD1 =null;
+    Equipo equipoD2 = null;
+    
+    
+    //definir ganadores del grupo C:
+    if(grupoDorden.get(0).getPuntaje()>grupoDorden.get(1).getPuntaje()){
+        equipoD1 =grupoDorden.get(0);
+        if(grupoDorden.get(1).getPuntaje()>grupoDorden.get(2).getPuntaje()){
+            equipoD2 =grupoDorden.get(1);
+        }else if(grupoDorden.get(1).getPuntaje() == grupoDorden.get(2).getPuntaje()){
+            Integer diferencia1= grupoDorden.get(1).getGolesFavor() - grupoDorden.get(1).getGolesContra();
+            Integer diferencia2= grupoDorden.get(2).getGolesFavor() - grupoDorden.get(2).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoD2 = grupoDorden.get(1);
+            }else{equipoD2 = grupoDorden.get(2);}
+                
+            }
+        } else if(grupoDorden.get(0).getPuntaje()==grupoDorden.get(1).getPuntaje()){
+        Integer diferencia1= grupoDorden.get(0).getGolesFavor() - grupoDorden.get(0).getGolesContra();
+            Integer diferencia2= grupoDorden.get(1).getGolesFavor() - grupoDorden.get(1).getGolesContra();
+            if(diferencia1 > diferencia2){
+                equipoD1 = grupoDorden.get(0);
+                equipoD2 = grupoDorden.get(1);
+            }else{equipoD1 = grupoDorden.get(1);
+                  equipoD2 = grupoDorden.get(0);  }
+        }//fin Definicion de ganadores
+    System.out.println("ganadores del grupo D: ");
+    System.out.println("equipo1:"+equipoD1.getPais()+ " " + equipoD1.toString());
+    System.out.println("equipo2:"+equipoD2.getPais()+ " " + equipoD2.toString());
+    
+    
+    
+    }
+    
+      
         
     
-        
+    /*Equipo equipoA2;
+    Equipo equipoB1;
+    Equipo equipoB2;
+    Equipo equipoC1;
+    Equipo equipoC2;
+    Equipo equipoD1;
+    Equipo equipoD2;*/
+    
+    
+
+
+
+// =============================================================================
+//                  ====    Monitores de data Entry    ====        
+// =============================================================================s
+    public Boolean faseGruposCompletada(String fixtureId){
+    Boolean rta =true;
+    Fixture fixture = fixtureRepositorio.findById(fixtureId).get();
+    List<PartidoGrupo> lista = fixture.getListaPartidosGrupos();
+        for (PartidoGrupo pg : lista) {
+            if(pg.getGolesEquipo1() == null || pg.getGolesEquipo2() == null ){
+            rta =false;
+            break;
+            } 
+        }
+    return rta;}
+    
+// =============================================================================
+//                    =====    UTILIDADES     =====
+// =============================================================================    
+//             ==== buscar por tagPartido dentro de un fixture    ====        
     private Equipo buscarPorTag(String idFixture, String tag){
     Equipo equipo = null;
     Fixture fixture = fixtureRepositorio.findById(idFixture).get();

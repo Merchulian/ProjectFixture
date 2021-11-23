@@ -97,8 +97,9 @@ public class PortalControlador {
         }
         
     }
-    
-    //EL FIXTURE SOLO PODRA INGRESAR UN USUARIO LOGUEADO.
+//                      ====    vISTA fIXTURE    ====    
+//EL FIXTURE SOLO PODRA INGRESAR UN USUARIO LOGUEADO.
+
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @GetMapping("/fixture")
    public String fixture(ModelMap model , HttpSession session) throws ErrorServicio {
@@ -108,7 +109,7 @@ public class PortalControlador {
         if(usuario != null){
             Fixture fixture = usuario.getFixture();
             String idFixture = fixture.getId();
-            partidoGrupoServicio.guardarEstadisticas(idFixture);
+            
             String goles1="";
             String goles2="";
             for (Integer i = 1; i <= 24; i++) {
@@ -120,12 +121,27 @@ public class PortalControlador {
                     model.put(goles2 , partido.getGolesEquipo2());
                 }
             }
+            
+            if(partidoGrupoServicio.faseGruposCompletada(idFixture)){
+            partidoGrupoServicio.guardarEstadisticas(idFixture);
+            
+        partidoGrupoServicio.definirCuartos(idFixture);
+            
+            //aca van unos model.put para mostrar la info de cuartos
+            //if(partidoEliminatorio.cuartosCompleatdos()){ definirSemis() y model.put}
+            //if(semisCompletadas){partidoEliminatorio.definirFinal() y model.put()}
+            
+            
+            }else{System.out.println("todavia falta rellenar partidos de fase de grupos");}
 
             return "fixture.html";
         }else{
-            return "redirect:/";}
+            return "redirect:/index";}
     }
-    
+   
+   
+   
+ //  ===========================================================================   
 //     A ESTADISTICAS SOLO PODRA INGRESAR UN USUARIO LOGUEADO, DEBIDO QUE LAS MISMAS SE CREAN EN BASE AL FIXTURE COMPLETADO
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
     @GetMapping("/estadisticas")
