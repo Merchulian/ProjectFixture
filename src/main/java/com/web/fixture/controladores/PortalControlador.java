@@ -133,8 +133,10 @@ public class PortalControlador {
                 for (Integer i = 1; i <=4; i++) {
                 PartidoEliminatorio pe = partidoEliminatorioServicio.traerPartido(idFixture, i.toString());
                 model.put("pe"+i.toString()+"Eq1", pe.getEquipo1().getPais()  );
+                model.put("golesPe"+i.toString()+"Eq1", pe.getGolesEquipo1());
                 model.put("pe"+i.toString()+"Eq2" , pe.getEquipo2().getPais()  );
-                    
+                model.put("golesPe"+i.toString()+"Eq2", pe.getGolesEquipo1());
+                
                 }
 
             //aca van unos model.put para mostrar la info de cuartos
