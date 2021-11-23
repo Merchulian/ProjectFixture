@@ -103,33 +103,24 @@ public class PortalControlador {
     @GetMapping("/fixture")
    public String fixture(ModelMap model , HttpSession session) throws ErrorServicio {
 	Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        
+        
         if(usuario != null){
             Fixture fixture = usuario.getFixture();
+            String idFixture = fixture.getId();
+            partidoGrupoServicio.guardarEstadisticas(idFixture);
             String goles1="";
             String goles2="";
             for (Integer i = 1; i <= 24; i++) {
                 PartidoGrupo partido = partidoGrupoServicio.traerPartido(fixture.getId() ,i.toString());
-                System.out.println("partido " + partido.getTag());
-                
                 goles1 ="golesEquipo1_" + i;
                 goles2 ="golesEquipo2_" + i;
-                if(partido.getGolesEquipo1()!=null && partido.getGolesEquipo2() !=null){
+                if(partido.getGolesEquipo1()!= null && partido.getGolesEquipo2() !=null){
                     model.put(goles1 ,partido.getGolesEquipo1());
                     model.put(goles2 , partido.getGolesEquipo2());
                 }
             }
-            //definir grupo A
-            partidoGrupoServicio.definirGrupo("A", fixture.getId());
-            //definir grupo B
-            partidoGrupoServicio.definirGrupo("B", fixture.getId());
-            //definir grupo C
-            partidoGrupoServicio.definirGrupo("C", fixture.getId());
-            //definir grupo D
-            partidoGrupoServicio.definirGrupo("D", fixture.getId());
-            //definir cuartos
-            // definir semis
-            //definir final y 3y4
-            
+
             return "fixture.html";
         }else{
             return "redirect:/";}

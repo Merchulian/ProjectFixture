@@ -57,14 +57,20 @@ public class FixtureServicio {
         List<PartidoEliminatorio> listapartidoEliminatorio = new ArrayList();
         List<Equipo> equiposfixture = new ArrayList();
         
-        //creacionb de listas de equipos
+        //creacion de listas de equipos
         
         for (ListaEquipos item : listaEquipos) {
+            System.out.println(item.toString());
             Equipo equipo = new Equipo();
+           
             equipo.setPais(item.getPais());
             equipo.setGrupo(item.getGrupo());
-            
-            equipo.setNumeroEquipo(item.getIdEquipo());
+            equipo.setGolesContra(0);
+            equipo.setGolesFavor(0);
+            equipo.setPuntaje(0);
+            Integer idItem = item.getIdEquipo();
+            System.out.println(idItem);
+            equipo.setNumeroEquipo(idItem);
             equiposfixture.add(equipo);
             equipoRepositorio.save(equipo);
             System.out.println(equipo.toString());

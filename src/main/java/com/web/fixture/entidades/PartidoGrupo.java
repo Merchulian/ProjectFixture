@@ -144,9 +144,6 @@ public class PartidoGrupo {
         this.tag = tag;
     }
 
-    /**
-     * @param golesEquipo1 the golesEquipo1 to set
-     */
     public void setGolesEquipo1(Integer golesEquipo1) {
         this.golesEquipo1 = golesEquipo1;
     }
@@ -157,6 +154,13 @@ public class PartidoGrupo {
     public void setGolesEquipo2(Integer golesEquipo2) {
         this.golesEquipo2 = golesEquipo2;
     }
+
+    @Override
+    public String toString() {
+        return "PartidoGrupo{" + "idPartido=" + idPartido + ", equipo1=" + equipo1 + ", equipo2=" + equipo2 + ", tag=" + tag + ", golesEquipo1=" + golesEquipo1 + ", golesEquipo2=" + golesEquipo2 + '}';
+    }
+    
+    
 
  
 }

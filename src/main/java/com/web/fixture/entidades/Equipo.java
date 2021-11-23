@@ -27,6 +27,7 @@ public class Equipo {
     private Integer golesContra;
     
     // Este numero coincide con el id de los equipos listados
+    
     private Integer numeroEquipo;
     
     private String fase;
@@ -107,7 +108,7 @@ public class Equipo {
         this.golesContra = golesContra;
     }
 
-    public void setNumeroEquipo(Integer numeroEuipo){
+    public void setNumeroEquipo(Integer numeroEquipo){
         this.numeroEquipo = numeroEquipo;
     }
     
@@ -121,8 +122,10 @@ public class Equipo {
 
     @Override
     public String toString() {
-        return "Equipo{" + "idEquipo=" + idEquipo + ", pais=" + pais + ", fase=" + fase + ", grupo=" + grupo + '}';
+        return "Equipo{" + "idEquipo=" + idEquipo + ", puntaje=" + puntaje + ", golesFavor=" + golesFavor + ", golesContra=" + golesContra + ", numeroEquipo=" + numeroEquipo + '}';
     }
+
+
 
    
 }

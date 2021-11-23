@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface PartidoGrupoRepositorio extends  JpaRepository<PartidoGrupo, Integer>{
+public interface PartidoGrupoRepositorio extends JpaRepository<PartidoGrupo, Integer>{
     
     /* para buscar los partudos de la fase de grupos de un dado fixture*/
     @Query(value ="SELECT lista_partidos_grupos_id_partido FROM fixture_lista_partidos_grupos WHERE fixture_id = :id",

@@ -30,7 +30,7 @@ public class FixtureControlador {
     @Autowired
     private FixtureServicio fixtureServicio;
     @Autowired
-    private PartidoGrupoServicio partidoGrupoSevicio ;
+    private PartidoGrupoServicio partidoGrupoServicio ;
     @Autowired
     private PartidoGrupoRepositorio partidoGrupoRepositorio ;
     @Autowired
@@ -43,19 +43,21 @@ public class FixtureControlador {
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
     @PostMapping("/definir-partido")
     /*depende cual boton aprieto, llega como id el del partido y a partir de alli guardo el partido*/
-    public String definirPartido(HttpSession session, ModelMap model ,@RequestParam String id ,@RequestParam Integer golesEquipo1,@RequestParam Integer golesEquipo2) throws ErrorServicio {
+    public String definirPartido(HttpSession session, ModelMap model ,@RequestParam String id ,@RequestParam(required = false) Integer golesEquipo1,@RequestParam(required = false) Integer golesEquipo2) throws ErrorServicio {
         /*Recupero la session del usuario logueado*/
         try{
             Usuario usuario = (Usuario) session.getAttribute("usuariosession");
 
-    /*Traer el fixture del usuario*/
-    
+            //Traer el fixture del usuario    
             Fixture fixture = usuario.getFixture();
-            //System.out.println("idFixture:" + fixture.getId());
-    /*modificar el partido que corresponde, segun el id*/
-        partidoGrupoSevicio.guardarPartido(fixture.getId() , id /*id del usuario*/, golesEquipo1, golesEquipo2);
+            //modificar el partido que corresponde, segun el id*/
+            
+                partidoGrupoServicio.guardarPartido(fixture.getId() , id /*id del usuario*/, golesEquipo1, golesEquipo2);
+                
+              
+                
         }catch(ErrorServicio e){
-        e.getMessage();
+            System.out.println(e.getMessage());
         }finally{
         return "redirect:/fixture";
         /* el controlador de la accion /fixture esta en PortalControlador*/
