@@ -6,10 +6,31 @@
 package com.web.fixture.servicios;
 
 import com.web.fixture.entidades.Equipo;
+import com.web.fixture.entidades.ListaEquipos;
+import com.web.fixture.repositorios.ListaEquipoRepositorio;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Utilidades {
+    @Autowired
+    private ListaEquipoRepositorio listaEquiposRepositorio;
+    
+    
+    
+    public ListaEquipos traerListaEquipo(Equipo equipo){
+        Integer tag = equipo.getNumeroEquipo();
+        ListaEquipos eq = null;
+        List<ListaEquipos> lista = listaEquiposRepositorio.findAll();
+        for (ListaEquipos item : lista) {
+            if(item.getIdEquipo().equals(tag)){
+            eq = item;
+            }
+            
+        }
+    return eq;
+    }
 
     public Integer convertirStringenInt(String string) {
 

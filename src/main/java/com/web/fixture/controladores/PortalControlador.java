@@ -2,6 +2,7 @@
 package com.web.fixture.controladores;
 
 import com.web.fixture.entidades.Fixture;
+import com.web.fixture.entidades.PartidoEliminatorio;
 import com.web.fixture.entidades.PartidoGrupo;
 import com.web.fixture.entidades.Usuario;
 import com.web.fixture.errores.ErrorServicio;
@@ -11,6 +12,7 @@ import com.web.fixture.servicios.FixtureServicio;
 import com.web.fixture.servicios.PartidoEliminatorioServicio;
 import com.web.fixture.servicios.PartidoGrupoServicio;
 import com.web.fixture.servicios.UsuarioServicio;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,7 +35,7 @@ public class PortalControlador {
     private FixtureServicio fixtureServicio;
     
     @Autowired
-    private PartidoEliminatorioServicio partidoEliServicio;
+    private PartidoEliminatorioServicio partidoEliminatorioServicio;
     
     @Autowired
     private PartidoGrupoServicio partidoGrupoServicio;
@@ -125,8 +127,16 @@ public class PortalControlador {
             if(partidoGrupoServicio.faseGruposCompletada(idFixture)){
             partidoGrupoServicio.guardarEstadisticas(idFixture);
             
-        partidoGrupoServicio.definirCuartos(idFixture);
-            
+            partidoGrupoServicio.definirCuartos(idFixture);
+            // me traigo la lista con los cuartos de final y los muestro en la pantalla:
+            List<PartidoEliminatorio> listaE = fixture.getListaPartidosEliminatorio();
+                for (Integer i = 1; i <=4; i++) {
+                PartidoEliminatorio pe = partidoEliminatorioServicio.traerPartido(idFixture, i.toString());
+                model.put("pe"+i.toString()+"Eq1", pe.getEquipo1().getPais()  );
+                model.put("pe"+i.toString()+"Eq2" , pe.getEquipo2().getPais()  );
+                    
+                }
+
             //aca van unos model.put para mostrar la info de cuartos
             //if(partidoEliminatorio.cuartosCompleatdos()){ definirSemis() y model.put}
             //if(semisCompletadas){partidoEliminatorio.definirFinal() y model.put()}

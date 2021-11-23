@@ -7,10 +7,13 @@ package com.web.fixture.servicios;
 
 import com.web.fixture.entidades.Equipo;
 import com.web.fixture.entidades.Fixture;
+import com.web.fixture.entidades.ListaEquipos;
+import com.web.fixture.entidades.PartidoEliminatorio;
 import com.web.fixture.entidades.PartidoGrupo;
 import com.web.fixture.errores.ErrorServicio;
 import com.web.fixture.repositorios.EquipoRepositorio;
 import com.web.fixture.repositorios.FixtureRepositorio;
+import com.web.fixture.repositorios.PartidoEliminatorioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.web.fixture.repositorios.PartidoGrupoRepositorio;
@@ -19,20 +22,24 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import javax.transaction.Transactional;
-import org.springframework.data.repository.query.Param;
 
 @Service
 public class PartidoGrupoServicio {
 
     @Autowired
     private PartidoGrupoRepositorio partidoGrupoRepositorio;
-    
+    @Autowired
+    private PartidoEliminatorioServicio partidoEliminatorioServicio;
+    @Autowired
+    private PartidoEliminatorioRepositorio partidoEliminatorioRepositorio;
     @Autowired
     private EquipoServicio equipoServicio;
     @Autowired
     private FixtureRepositorio fixtureRepositorio;
     @Autowired
     private EquipoRepositorio equipoRepositorio;
+    @Autowired
+    private Utilidades utilidades;
     
 //             ====    Traer un partidoGrupo de un fixture existente   ==== 
     
@@ -149,7 +156,7 @@ public void guardarEstadisticas(String fixtureId) throws ErrorServicio {
 // 2)    PASE A CUARTOS
 /*Aca pasan los dos mejores de cada grupo (definen por puntos o por goles)*/
 
-public void definirCuartos(String idFixture){
+public void definirCuartos(String idFixture) throws ErrorServicio{
     Fixture fixture = fixtureRepositorio.findById(idFixture).get();
     // veo la lista de equipos y defino quienes son los primeros ganadores de cada grupo
     List<Equipo> listaCompleta = fixture.getListaEquipos();
@@ -283,7 +290,7 @@ public void definirCuartos(String idFixture){
     Equipo equipoD2 = null;
     
     
-    //definir ganadores del grupo C:
+    //definir ganadores del grupo D:
     if(grupoDorden.get(0).getPuntaje()>grupoDorden.get(1).getPuntaje()){
         equipoD1 =grupoDorden.get(0);
         if(grupoDorden.get(1).getPuntaje()>grupoDorden.get(2).getPuntaje()){
@@ -308,22 +315,62 @@ public void definirCuartos(String idFixture){
     System.out.println("ganadores del grupo D: ");
     System.out.println("equipo1:"+equipoD1.getPais()+ " " + equipoD1.toString());
     System.out.println("equipo2:"+equipoD2.getPais()+ " " + equipoD2.toString());
+    //===========================================================================
+    //===========================================================================
+    //===========================================================================
     
+
+// armo los partidos de cuartos
     
-    
+    List<PartidoEliminatorio> listaElim = fixture.getListaPartidosEliminatorio();
+    //Cuartos 1:
+    PartidoEliminatorio pe1 = partidoEliminatorioServicio.traerPartido(fixture.getId() , "1");
+        ListaEquipos eqPartA1= utilidades.traerListaEquipo(equipoA1);
+        ListaEquipos eqPartB2= utilidades.traerListaEquipo(equipoB2);
+        //El partido 1 lo juega el mejor del A con el segundo del B
+        pe1.setEquipo1(eqPartA1);
+        pe1.setEquipo2(eqPartB2);
+        System.out.println(pe1.getEquipo1() + "  " + pe1.getEquipo2());
+        partidoEliminatorioRepositorio.save(pe1);
+    //Cuartos 2:
+    PartidoEliminatorio pe2 = partidoEliminatorioServicio.traerPartido(fixture.getId() , "2");
+        ListaEquipos eqPartA2= utilidades.traerListaEquipo(equipoA2);
+        ListaEquipos eqPartB1= utilidades.traerListaEquipo(equipoB1);
+        //El partido 2 lo juega el segundo del A con el primero del B
+        pe2.setEquipo1(eqPartA2);
+        pe2.setEquipo2(eqPartB1);
+        System.out.println(pe1.getEquipo2() + "  " + pe2.getEquipo2());
+        partidoEliminatorioRepositorio.save(pe2);
+
+    //Cuartos 3:
+    PartidoEliminatorio pe3 = partidoEliminatorioServicio.traerPartido(fixture.getId() , "3");
+    ListaEquipos eqPartC1= utilidades.traerListaEquipo(equipoC1);
+    ListaEquipos eqPartD2= utilidades.traerListaEquipo(equipoD2);
+        //El partido 2 lo juega el segundo del A con el primero del B
+        pe3.setEquipo1(eqPartC1);
+        pe3.setEquipo2(eqPartD2);
+        System.out.println(pe3.getEquipo1() + "  " + pe3.getEquipo2());
+        partidoEliminatorioRepositorio.save(pe3);
+
+//Cuartos 4:
+    PartidoEliminatorio pe4 = partidoEliminatorioServicio.traerPartido(fixture.getId() , "4");
+    ListaEquipos eqPartC2= utilidades.traerListaEquipo(equipoC2);
+    ListaEquipos eqPartD1= utilidades.traerListaEquipo(equipoD1);
+        //El partido 2 lo juega el segundo del A con el primero del B
+        pe4.setEquipo1(eqPartC2);
+        pe4.setEquipo2(eqPartD1);
+        partidoEliminatorioRepositorio.save(pe4);
     }
+    
+    
+    
+    
+    
     
       
         
     
-    /*Equipo equipoA2;
-    Equipo equipoB1;
-    Equipo equipoB2;
-    Equipo equipoC1;
-    Equipo equipoC2;
-    Equipo equipoD1;
-    Equipo equipoD2;*/
-    
+
     
 
 
@@ -351,9 +398,6 @@ public void definirCuartos(String idFixture){
     Equipo equipo = null;
     Fixture fixture = fixtureRepositorio.findById(idFixture).get();
     List<Equipo> equipos = fixture.getListaEquipos();
-        System.out.println("======");
-        System.out.println("lista equipos fixture: " + equipos.size());
-        System.out.println("======");
         
         for (Equipo item : equipos ) {
             if( item.getNumeroEquipo().toString().equals(tag) ){

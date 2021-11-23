@@ -600,42 +600,58 @@
                 <div class="Partidos">
                     
                     <p class="Horarios">18:00 - 16/11</p>
-                    <span class="Paises"> <input type="text" name="" id=""class="Input-T" readonly > <input type="number" name="" id=""min="0" max="9"class="Input-N"></span>
+                    <span class="Paises"> 
+                    <input type="text" name="pe1Eq1" th:value="${pe1Eq1}"id=""class="Input-T" readonly > 
+                    <input type="number" name="golesPe1E1" th:value="${golesPe1E1}"id=""min="0" max="9"class="Input-N"></span>
 
                     <span class="Paises" style="font-weight: bold;"><img src="assets/images/vs.png" alt="" width="60px" height="60px"></span>
                          
-                    <span class="Paises"> <input type="number" name="" id=""min="0" max="9"class="Input-N" >  <input type="text" name="" id=""class="Input-T" readonly></span>
+                    <span class="Paises"> 
+                    
+                    <input type="number" name="golesPe1E2" th:value="${golesPe1E2}" id=""min="0" max="9"class="Input-N" >      
+                    <input type="text" name="pe1Eq2" th:value="${pe1Eq2}" id=""class="Input-T" readonly></span>
 
                 </div>
     
                 <div class="Partidos">                   
                     <p class="Horarios">18:00 - 16/11</p>
-                    <span class="Paises"> <input type="text" name="" id=""class="Input-T" readonly> <input type="number" name="" id=""min="0" max="9"class="Input-N"></span>
+                    <span class="Paises"> 
+                        <input type="text" name="pe2Eq1" th:value="${pe2Eq1}" id=""class="Input-T" readonly> 
+                        <input type="number" name="pe2golesEq1" th:value="${pe2GolesEq1}"id=""min="0" max="9"class="Input-N"></span>
 
                     <span class="Paises" style="font-weight: bold;"><img src="assets/images/vs.png" alt="" width="60px" height="60px"></span>
                          
-                    <span class="Paises"> <input type="number" name="" id=""min="0" max="9"class="Input-N">  <input type="text" name="" id=""class="Input-T" readonly></span>
+                    <span class="Paises"> 
+                        <input type="number" name="pe2golesEq2" th:value="pe2golesEq2" id=""min="0" max="9"class="Input-N">
+                        <input type="text" name="pe2Eq2" th:value="${pe2Eq2}"id=""class="Input-T" readonly></span>
                 </div>
     
     
     
                 <div class="Partidos">
                     <p class="Horarios">18:00 - 16/11</p>
-                    <span class="Paises"> <input type="text" name="" id=""class="Input-T" readonly> <input type="number" name="" id=""min="0" max="9"class="Input-N"></span>
+                    <span class="Paises"> 
+                        <input type="text" name="pe3Eq1" th:value="${pe3Eq1}" id=""class="Input-T" readonly> 
+                        <input type="number" name="pe3golesEq1" th:value="${pe3golesEq1}" id=""min="0" max="9"class="Input-N"></span>
 
                     <span class="Paises" style="font-weight: bold;"><img src="assets/images/vs.png" alt="" width="60px" height="60px"></span>
                          
-                    <span class="Paises"> <input type="number" name="" id=""min="0" max="9"class="Input-N">  <input type="text" name="" id=""class="Input-T" readonly></span>
+                    <span class="Paises"> 
+                        <input type="number" name="pe3golesEq2" th:value="${pe3golesEq2}" id=""min="0" max="9"class="Input-N">  
+                        <input type="text" name="pe3Eq2" th:value="${pe3Eq2}"id=""class="Input-T" readonly></span>
                 </div>
     
     
                 <div class="Partidos">
                     <p class="Horarios">18:00 - 16/11</p>
-                    <span class="Paises"> <input type="text" name="" id=""class="Input-T" readonly> <input type="number" name="" id=""min="0" max="9"class="Input-N"></span>
+                    <span class="Paises"> <input type="text" name="pe4Eq1" th:value="${pe4Eq1}" id=""class="Input-T" readonly> 
+                        <input type="number" name="" id=""min="0" max="9"class="Input-N"></span>
 
                     <span class="Paises" style="font-weight: bold;"><img src="assets/images/vs.png" alt="" width="60px" height="60px"></span>
                          
-                    <span class="Paises"> <input type="number" name="" id=""min="0" max="9"class="Input-N">  <input type="text" name="" id=""class="Input-T" readonly></span>
+                    <span class="Paises"> 
+                        <input type="number" name="pe4GolesEq2" id=""min="0" max="9"class="Input-N">
+                        <input type="text" name="pe4Eq2" th:value="${pe4Eq2}" id=""class="Input-T" readonly></span>
                 </div>
             <button type="submit">Guardar</button>
             </form>        
