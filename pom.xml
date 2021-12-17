@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.web</groupId>
-	<artifactId>fixture</artifactId>
+	<artifactId>Fixturev1.0</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>fixture Martin</name>
+	<name>Fixture v1.0</name>
 	<description>Sitio para armar tu propio fixture</description>
 	<properties>
 		<java.version>1.8</java.version>

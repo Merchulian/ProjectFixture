@@ -25,12 +25,15 @@ public class PartidoEliminatorioServicio {
 
     @Autowired
     private PartidoEliminatorioRepositorio partidoRep;
-    @Autowired
-    private PartidoEliminatorioRepositorio partidoEliminatorioRepositorio;
+//    @Autowired
+//    private EquipoServicio equipoServicio;
     @Autowired
     private FixtureRepositorio fixtureRepositorio;
     @Autowired
     private Utilidades utiles;
+    
+     @Autowired
+    private PartidoEliminatorioRepositorio partidoEliminatorioRepositorio;
     
     //             ====    Traer un partidoGrupo de un fixture existente   ==== 
     
@@ -48,7 +51,8 @@ public class PartidoEliminatorioServicio {
         return partido;
 
     }
-//   verificar si en cuartos los partidos estan completos
+    
+    //   verificar si en cuartos los partidos estan completos
     public Boolean cuartosCompletada(String fixtureId) throws ErrorServicio{
     Boolean rta = true;
     Fixture fixture = fixtureRepositorio.findById(fixtureId).get();
@@ -124,4 +128,6 @@ public class PartidoEliminatorioServicio {
         }
         return ganador;
     }
+
+    
 }

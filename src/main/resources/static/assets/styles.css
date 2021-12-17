@@ -1,0 +1,175 @@
+*{
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color:white;
+    padding: 0;
+    margin: 0;
+  }
+
+
+.nav-principal{
+    display: flex;
+    justify-content: space-between;
+    background-color: #222;
+    color: white;
+    border-bottom: 2px solid crimson;
+  }
+  .menu{
+    display: flex;
+    margin: 0%;
+    padding: 0%;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-size: 1.5rem;
+  }
+  .Titulo{
+    text-align: center;
+    font-size: 2.5rem;
+    border-bottom: 1px solid crimson;
+  }
+  .nav-3{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    
+    margin: 0%;
+    font-size: 1.5rem;
+    margin-right: 1vh;
+  }
+  .nav3-li{
+    text-decoration:none;
+    color: white;
+  }
+  .nav-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-decoration:none;
+    color: white;
+    margin-bottom: 1vh;
+    
+  }
+  .nav-1{
+    width: 8em;
+    height: 8em;
+    align-self: center;
+    justify-self: center;
+  }
+  
+    li a{
+        text-decoration: none;
+        color:white
+      }
+      a:visited{
+        text-decoration:none;
+        color: white;
+        
+      }
+      li a:hover{
+        font-size: 24px;
+        color:crimson;
+        border-bottom:2px solid crimson;
+        cursor: pointer;
+      }
+
+      .titulares {
+        padding: 1rem;
+        background-color: #222;
+        color: #EEE;
+        font-size: 2.5vh;
+        display: flex;
+        justify-content: space-around;
+        font-family: 'Kanit', sans-serif;
+        
+        
+    
+        
+      }
+
+      .main-content{
+          display: flex;
+      }
+      .button-container{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        width: 100%;
+      }
+      .img-principal{
+          width: 90%;
+          height: 80vh;
+          align-self: center;
+          justify-self: center;
+          
+          background: #870000;  /* fallback for old browsers */
+          background: -webkit-linear-gradient(to right, #190A05, #870000);  /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(to right, #190A05, #870000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          
+
+          margin-bottom: 8vh;
+          margin-top: 2.5vh;
+          border: 2px solid black;
+          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
+
+      }
+     
+      .fixture-button{
+          position: absolute;
+         background-color: #312d2d;
+          
+          justify-self: center;
+          align-self: center;
+          
+          color: white;
+          border: 1px solid crimson;
+          box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+          width: 25rem;
+          height: 5.5rem;
+          font-size: 2.5rem;
+          margin-bottom: 15vh;
+        
+      }
+      .fixture-button a{
+          text-decoration: none;
+          color:white;
+      }
+      .fixture-button:hover{
+          font-size: 2.6rem;
+          
+      }
+
+      .second-content{
+        display: flex;
+
+      }
+      .tabla-button{
+        position: absolute;
+        text-decoration: none;
+        
+        color: black;
+        border-bottom: 2px solid black;
+        font-size: 7.5rem;
+      
+    }
+    .img-principal2{
+      width: 90%;
+      height: 80vh;
+      align-self: center;
+      justify-self: center;
+      filter: blur(4px);
+      
+
+      margin-bottom: 8vh;
+      margin-top: 2.5vh;
+      border: 2px solid black;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    
+
+  }

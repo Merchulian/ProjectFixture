@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -21,14 +21,12 @@
             <ul>
 
                 <li class="nav-bar " ><a href="/inicio">Inicio</a></li>
-                <li class="nav-bar"><a href="/noticias">Noticias</a></li>
-                <li class="nav-bar"><a href="/fixture">Fixture</a></li>
-                <li class="nav-bar"><a href="/estadisticas">Estadisticas</a></li>
+                <li class="nav-bar"><a href="/noticias/login">Noticias</a></li>
+                <li class="nav-bar"><a th:href="@{/estadisticas(id=__${session.usuariosession.idUsuario}__)}">Estadisticas</a></li>
 
-                <li class="nav-bar"><a href="/login">Login</a></li>
-                <li class="nav-bar"><a href="/registro">Register</a></li>
+                <li class="nav-bar"><a href="/logout">Salir</a></li>
+                <li><a th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.idUsuario}__)}">Editar Perfil</a></li> 
             </ul>
-
         </nav>
     </header>
     <main>
@@ -51,7 +49,7 @@
                 <p class="Horarios">18:00 - 16/11</p>
                 <!--equipo 1  -->
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Rusia
+                    <img src="/assets/images/Rusia.svg" alt="" width="25px" height="25px">Rusia
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_1}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -62,7 +60,7 @@
                 <!--equipo 2  -->
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_1}" min="0" max="9" class="Input-N"> Arabia Saudita 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Arabia Saudita.svg" alt="" width="25px" height="25px"> 
                 </span>
                 <button type="submit" class="btn-outline-secondary">Guardar</button>    
             </form>
@@ -73,14 +71,14 @@
                 <input type="hidden" name ="id" th:value="2" >    
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px"> Egipto
+                    <img src="/assets/images/Egipto.svg" alt="" width="25px" height="25px"> Egipto
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_2}" min="0" max="9" class="Input-N"></span>
                             <span class="Paises" style="font-weight: bold;">
                                 <img src="assets/images/vs.png" alt="" width="60px" height="60px">
                             </span>
                    <span class="Paises">
                        <input type="number" name="golesEquipo2" th:value="${golesEquipo2_2}" min="0" max="9" class="Input-N"> Uruguay 
-                       <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                       <img src="/assets/images/Uruguay.svg" alt="" width="25px" height="25px"> 
                    </span>
             <button type="submit">Guardar</button>
             </form>    
@@ -93,7 +91,7 @@
                 <input type="hidden" name ="id" th:value="3" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Rusia 
+                    <img src="/assets/images/Rusia.svg" alt="" width="25px" height="25px">Rusia 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_3}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -102,7 +100,7 @@
                 </span>
                     
                 <span class="Paises"><input type="number" name="golesEquipo2" th:value="${golesEquipo2_3}" min="0" max="9" class="Input-N"> Egipto 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Egipto.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button>    
             </form>                
@@ -115,7 +113,7 @@
                 <input type="hidden" name ="id" th:value="4" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Arabia Saudita 
+                    <img src="/assets/images/Arabia Saudita.svg" alt="" width="25px" height="25px">Arabia Saudita 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_4}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -125,7 +123,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_4}" min="0" max="9" class="Input-N"> Uruguay 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Uruguay.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button>    
             </form>    
@@ -138,7 +136,7 @@
                 <input type="hidden" name ="id" th:value="5" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Rusia 
+                    <img src="/assets/images/Rusia.svg" alt="" width="25px" height="25px">Rusia 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_5}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -148,7 +146,7 @@
                     
                 <span class="Paises">
                     <input type="number"name="golesEquipo2" th:value="${golesEquipo2_5}" min="0" max="9" class="Input-N"> Uruguay 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Uruguay.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button>    
             </form>                 
@@ -159,7 +157,7 @@
                 <input type="hidden" name ="id" th:value="6" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25" height="25">Arabia Saudita 
+                    <img src="/assets/images/Arabia Saudita.svg" alt="" width="25" height="25">Arabia Saudita 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_6}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -169,7 +167,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_6}" min="0" max="9" class="Input-N"> Egipto 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Nigeria.svg" alt="" width="25px" height="25px"> 
                 </span>
         <button type="submit">Guardar</button>
         </form>                
@@ -189,7 +187,7 @@
                 <input type="hidden" name ="id" th:value="7" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Portugal 
+                    <img src="/assets/images/Portugal.svg" alt="" width="25px" height="25px">Portugal 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_7}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -199,7 +197,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_7}" min="0" max="9" class="Input-N"> España
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/España.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button>    
             </form>    
@@ -212,7 +210,7 @@
                 <input type="hidden" name ="id" th:value="8" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Marruecos 
+                    <img src="/assets/images/Marruecos.svg" alt="" width="25px" height="25px">Marruecos 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_8}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -222,7 +220,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_8}" min="0" max="9" class="Input-N"> Irán 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Irán.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                  
@@ -235,7 +233,7 @@
                 <input type="hidden" name ="id" th:value="9" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Portugal 
+                    <img src="/assets/images/Portugal.svg" alt="" width="25px" height="25px">Portugal 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_9}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -245,7 +243,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_9}" min="0" max="9" class="Input-N"> Marruecos
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Marruecos.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                   
@@ -257,7 +255,7 @@
                 <input type="hidden" name ="id" th:value="10" >
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">España
+                    <img src="/assets/images/España.svg" alt="" width="25px" height="25px">España
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_10}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -267,7 +265,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_10}" min="0" max="9" class="Input-N"> Irán 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Irán.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                 
@@ -278,7 +276,7 @@
                 <input type="hidden" name ="id" th:value="11">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Portugal 
+                    <img src="/assets/images/Portugal.svg" alt="" width="25px" height="25px">Portugal 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_11}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -288,7 +286,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_11}" min="0" max="9" class="Input-N"> Irán
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Irán.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>     
@@ -299,7 +297,7 @@
                 <input type="hidden" name ="id" th:value="12">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">España 
+                    <img src="/assets/images/España.svg" alt="" width="25px" height="25px">España 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_12}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -309,7 +307,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_12}" min="0" max="9" class="Input-N"> Marruecos
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Marruecos.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>     
@@ -329,7 +327,7 @@
                 <input type="hidden" name ="id" th:value="13">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Francia 
+                    <img src="/assets/images/Francia.svg" alt="" width="25px" height="25px">Francia 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_13}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -339,7 +337,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_13}" min="0" max="9" class="Input-N"> Australia 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Australia.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>
@@ -351,7 +349,7 @@
                 <input type="hidden" name ="id" th:value="14">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Perú
+                    <img src="/assets/images/Perú.svg" alt="" width="25px" height="25px">Perú
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_14}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -361,7 +359,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_14}" min="0" max="9" class="Input-N"> Dinamarca 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Dinamarca.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                
@@ -372,7 +370,7 @@
                 <input type="hidden" name ="id" th:value="15">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Francia 
+                    <img src="/assets/images/Francia.svg" alt="" width="25px" height="25px">Francia 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_15}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -382,7 +380,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_15}" min="0" max="9" class="Input-N"> Perú 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Perú.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                
@@ -394,7 +392,7 @@
                 <input type="hidden" name ="id" th:value="16">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Australia
+                    <img src="/assets/images/Australia.svg" alt="" width="25px" height="25px">Australia
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_16}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -403,7 +401,7 @@
                 </span>
                     
                 <span class="Paises"><input type="number" name="golesEquipo2" th:value="${golesEquipo2_16}" min="0" max="9" class="Input-N"> Dinamarca 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Dinamarca.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                
@@ -414,7 +412,7 @@
                 <input type="hidden" name ="id" th:value="17">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Francia 
+                    <img src="/assets/images/Francia.svg" alt="" width="25px" height="25px">Francia 
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_17}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -424,7 +422,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_17}" min="0" max="9" class="Input-N"> Dinamarca 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Dinamarca.svg" alt="" width="25px" height="25px"> 
                 </span>
             <button type="submit">Guardar</button> 
             </form>                
@@ -436,7 +434,7 @@
                 <input type="hidden" name ="id" th:value="18">
                 <p class="Horarios">18:00 - 16/11</p>
                 <span class="Paises">
-                    <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Australia
+                    <img src="/assets/images/Australia.svg" alt="" width="25px" height="25px">Australia
                     <input type="number" name="golesEquipo1" th:value="${golesEquipo1_18}" min="0" max="9" class="Input-N">
                 </span>
                     
@@ -446,7 +444,7 @@
                     
                 <span class="Paises">
                     <input type="number" name="golesEquipo2" th:value="${golesEquipo2_18}" min="0" max="9" class="Input-N"> Perú 
-                    <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                    <img src="/assets/images/Perú.svg" alt="" width="25px" height="25px"> 
                 </span>    
             <button type="submit">Guardar</button>
             </form>    
@@ -462,7 +460,7 @@
                     <input type="hidden" name ="id" th:value="19">
                     <p class="Horarios">18:00 - 16/11</p>
                     <span class="Paises">
-                        <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Argentina 
+                        <img src="/assets/images/Argentina.svg" alt="" width="25px" height="25px">Argentina 
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_19}" min="0" max="9" class="Input-N">
                     </span>
                         
@@ -472,7 +470,7 @@
                         
                     <span class="Paises">
                         <input type="number" name="golesEquipo2" th:value="${golesEquipo2_19}" min="0" max="9" class="Input-N"> Islandia 
-                        <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                        <img src="/assets/images/Islandia.svg" alt="" width="25px" height="25px"> 
                     </span>
                 <button type="submit">Guardar</button>
                 </form>                    
@@ -483,7 +481,7 @@
                     <input type="hidden" name ="id" th:value="20">
                     <p class="Horarios">18:00 - 16/11</p>
                     <span class="Paises">
-                        <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Croacia 
+                        <img src="/assets/images/Croacia.svg" alt="" width="25px" height="25px">Croacia 
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_20}" min="0" max="9" class="Input-N">
                     </span>
                         
@@ -493,7 +491,7 @@
                         
                     <span class="Paises">
                         <input type="number" name="golesEquipo2" th:value="${golesEquipo2_20}" min="0" max="9" class="Input-N"> Nigeria 
-                        <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                        <img src="/assets/images/Nigeria.svg" alt="" width="25px" height="25px"> 
                     </span>
                 <button type="submit">Guardar</button>
                 </form>     
@@ -504,7 +502,7 @@
                     <input type="hidden" name ="id" th:value="21">
                     <p class="Horarios">18:00 - 16/11</p>
                     <span class="Paises">
-                        <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Argentina 
+                        <img src="/assets/images/Argentina.svg" alt="" width="25px" height="25px">Argentina 
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_21}" min="0" max="9" class="Input-N">
                     </span>
                         
@@ -514,7 +512,7 @@
                         
                     <span class="Paises">
                         <input type="number" name="golesEquipo2" th:value="${golesEquipo2_21}" min="0" max="9" class="Input-N"> Nigeria
-                        <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                        <img src="/assets/images/Nigeria.svg" alt="" width="25px" height="25px"> 
                     </span>
                 <button type="submit">Guardar</button>
                 </form>     
@@ -525,7 +523,7 @@
                     <input type="hidden" name ="id" th:value="22">
                     <p class="Horarios">18:00 - 16/11</p>
                     <span class="Paises">
-                        <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Islandia 
+                        <img src="/assets/images/Islandia.svg" alt="" width="25px" height="25px">Islandia 
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_22}" min="0" max="9" class="Input-N">
                     </span>
                         
@@ -535,7 +533,7 @@
                         
                     <span class="Paises">
                         <input type="number" name="golesEquipo2" th:value="${golesEquipo2_22}" min="0" max="9" class="Input-N"> Croacia 
-                        <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                        <img src="/assets/images/Croacia.svg" alt="" width="25px" height="25px"> 
                     </span>
                 <button type="submit">Guardar</button>
                 </form>                     
@@ -547,7 +545,7 @@
                     <input type="hidden" name ="id" th:value="23">
                     <p class="Horarios">18:00 - 16/11</p>
                     <span class="Paises">
-                        <img src="assets/images/argentina.png" alt="" width="25px" height="25px"> Argentina
+                        <img src="/assets/images/Argentina.svg" alt="" width="25px" height="25px"> Argentina
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_23}" min="0" max="9" class="Input-N">
                     </span>
                         
@@ -557,7 +555,7 @@
                         
                     <span class="Paises">
                        <input type="number" name="golesEquipo2" th:value="${golesEquipo2_23}" min="0" max="9" class="Input-N">  Croacia
-                       <img src="assets/images/nigeria.png" alt="" width="25px" height="25px"> 
+                       <img src="/assets/images/Croacia.svg" alt="" width="25px" height="25px"> 
                     </span>
                 <button type="submit">Guardar</button>
                 </form>                     
@@ -568,7 +566,7 @@
                     <input type="hidden" name ="id" th:value="24">
                     <p class="Horarios">18:00 - 16/11</p>
                     <span class="Paises">
-                        <img src="assets/images/argentina.png" alt="" width="25px" height="25px">Islandia 
+                        <img src="/assets/images/Islandia.svg" alt="" width="25px" height="25px">Islandia 
                         <input type="number" name="golesEquipo1" th:value="${golesEquipo1_24}" min="0" max="9" class="Input-N">
                     </span>
                         
@@ -578,7 +576,7 @@
                         
                     <span class="Paises">
                         <input type="number" name="golesEquipo2" th:value="${golesEquipo2_24}" min="0" max="9" class="Input-N"> Nigeria 
-                        <img src="assets/images/nigeria.png" alt="" width="25px" height="25px">
+                        <img src="/assets/images/Nigeria.svg" alt="" width="25px" height="25px">
                     </span>
                 <button type="submit">Guardar</button>
                 </form>                     

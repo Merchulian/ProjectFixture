@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,13 +20,13 @@
         <nav class="menu">
             <ul>
 
-                <li class="nav-bar " ><a href="/">Inicio</a></li>
-                <li class="nav-bar"><a href="/login">Fixture</a></li>
+                <li class="nav-bar " ><a href="/inicio">Inicio</a></li>
+                <li class="nav-bar"><a href="/fixture">Fixture</a></li>
                 
-                <li class="nav-bar"><a href="/login">Estadisticas</a></li>
+                <li class="nav-bar"><a th:href="@{/estadisticas(id=__${session.usuariosession.idUsuario}__)}">Estadisticas</a></li>
 
-                <li class="nav-bar"><a href="/login">Login</a></li>
-                <li class="nav-bar"><a href="/registro">Registro</a></li>
+                <li class="nav-bar"><a href="/logout">Salir</a></li>
+                <li><a th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.idUsuario}__)}">Editar Perfil</a></li> 
             </ul>
 
         </nav>
@@ -198,115 +198,3 @@
 
     </aside>
 </div>
-
-
-
-
-
-
-    
-
-
-
-</main>
-<footer class="titulares">
-  <div>
-      <img src="../assets/images/phone (1).png" alt="" width="40px" height="40px">
-      <p> Contacto:</p>
-          <span>0800-555-334</span>
-  </div>
-
-  <div>
-      <img src="../assets/images/gmail.png" alt="" width="40px" height="40px">
-      <p>  Gmail:</p>
-      <span>infoFixture@gmail.com</span>
-  </div>
-
-  <div>
-      <span><img src="../assets/images/copyright (1).png" alt="" width="40px" height="40px">All Rights Reserved</span>
-  </div>
-</footer>
-<script type="text/javascript">
-    const slider = document.querySelector(".slider");
-    const nextBtn = document.querySelector(".next-btn");
-    const prevBtn = document.querySelector(".prev-btn");
-    const slides = document.querySelectorAll(".slide");
-    const slideIcons = document.querySelectorAll(".slide-icon");
-    const numberOfSlides = slides.length;
-    var slideNumber = 0;
-
-    //image slider next button
-    nextBtn.addEventListener("click", () => {
-      slides.forEach((slide) => {
-        slide.classList.remove("active");
-      });
-      slideIcons.forEach((slideIcon) => {
-        slideIcon.classList.remove("active");
-      });
-
-      slideNumber++;
-
-      if(slideNumber > (numberOfSlides - 1)){
-        slideNumber = 0;
-      }
-
-      slides[slideNumber].classList.add("active");
-      slideIcons[slideNumber].classList.add("active");
-    });
-
-    //image slider previous button
-    prevBtn.addEventListener("click", () => {
-      slides.forEach((slide) => {
-        slide.classList.remove("active");
-      });
-      slideIcons.forEach((slideIcon) => {
-        slideIcon.classList.remove("active");
-      });
-
-      slideNumber--;
-
-      if(slideNumber < 0){
-        slideNumber = numberOfSlides - 1;
-      }
-
-      slides[slideNumber].classList.add("active");
-      slideIcons[slideNumber].classList.add("active");
-    });
-
-    //image slider autoplay
-    var playSlider;
-
-    var repeater = () => {
-      playSlider = setInterval(function(){
-        slides.forEach((slide) => {
-          slide.classList.remove("active");
-        });
-        slideIcons.forEach((slideIcon) => {
-          slideIcon.classList.remove("active");
-        });
-
-        slideNumber++;
-
-        if(slideNumber > (numberOfSlides - 1)){
-          slideNumber = 0;
-        }
-
-        slides[slideNumber].classList.add("active");
-        slideIcons[slideNumber].classList.add("active");
-      }, 4000);
-    }
-    repeater();
-
-    //stop the image slider autoplay on mouseover
-    slider.addEventListener("mouseover", () => {
-      clearInterval(playSlider);
-    });
-
-    //start the image slider autoplay again on mouseout
-    slider.addEventListener("mouseout", () => {
-      repeater();
-    });
-    </script>
-   
-</body>
-</html>

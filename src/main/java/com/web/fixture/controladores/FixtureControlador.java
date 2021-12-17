@@ -46,7 +46,7 @@ public class FixtureControlador {
     
     
 //             ====    guardar formularios de los partidos de Grupos   ====
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
+   @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
     @PostMapping("/definir-partido")
     /*depende cual boton aprieto, llega como id el del partido y a partir de alli guardo el partido*/
     public String definirPartido(HttpSession session, ModelMap model ,@RequestParam String id ,@RequestParam(required = false) Integer golesEquipo1,@RequestParam(required = false) Integer golesEquipo2) throws ErrorServicio {
@@ -71,7 +71,7 @@ public class FixtureControlador {
     }
     
     //             ====    guardar formularios de los partidos de Cuartos   ====
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
+   @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")   
     @PostMapping("/definir-cuartos")
     /*deben estar precargados los 4 partidos con goles para continuar*/
     public String definirCuartos(HttpSession session, ModelMap model ,@RequestParam(required =false) Integer golesPe1Eq1 ,@RequestParam(required =false) Integer golesPe1Eq2,@RequestParam(required =false) Integer golesPe2Eq1 ,@RequestParam(required =false) Integer golesPe2Eq2 , @RequestParam(required =false) Integer golesPe3Eq1 ,@RequestParam(required =false) Integer golesPe3Eq2 , @RequestParam(required =false) Integer golesPe4Eq1 ,@RequestParam(required =false) Integer golesPe4Eq2) throws ErrorServicio {

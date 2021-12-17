@@ -52,6 +52,13 @@ public class PortalControlador {
         return "index.html";
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
+    @GetMapping("/inicio")
+    public String inicio() {
+		
+        return "inicio.html";
+    }
+    
     @GetMapping("/noticias")
     public String verNoticias() {
 		
@@ -183,18 +190,17 @@ public class PortalControlador {
    
  //  ===========================================================================   
 //     A ESTADISTICAS SOLO PODRA INGRESAR UN USUARIO LOGUEADO, DEBIDO QUE LAS MISMAS SE CREAN EN BASE AL FIXTURE COMPLETADO
-    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
-    @GetMapping("/estadisticas")
-    public String estadisticas() {
-		
-        return "estadisticas.html";
-    }
-  
-
+//    @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
+//    @GetMapping("/estadisticas")
+//    public String estadisticas() {
+//		
+//        return "estadisticas.html";
+//    }
     
     @PreAuthorize("hasAnyRole('ROLE_USUARIO_AUTORIZADO')")
-    @GetMapping("/inicio")
-    public String inicio() {
-        return "inicio.html";
+    @GetMapping("/noticias/login")
+    public String noticiaslog() {
+		
+        return "NoticiasLogueado.html";
     }
 }

@@ -21,7 +21,7 @@
         <nav class="menu">
             <ul>
 
-                <li class="nav-bar" ><a href="/"> <img src="assets/images/Forms/211686_back_arrow_icon.png" alt="" width="60p" height="60px" > </a></li>
+                <li class="nav-bar" ><a href="/inicio"> <img src="/assets/images/Forms/211686_back_arrow_icon.png" alt="" width="60p" height="60px" > </a></li>
          
             </ul>
 
@@ -33,14 +33,14 @@
         <div class="Register-Form">
             
             <!--        Agregar donde quieran una foto cualquiera, lo que hace los tag img es buscar si el usuario tiene una imagen la pone y si no pone la que se asigna por defecto  --> 
-            <!--    <img  th:if="${perfil.foto != null}" th:src="${'/foto/usuario/' + perfil.idUsuario'}" alt="" >
-            <img  th:if="${perfil.foto == null}" scr="aca agregar foto por defecto" alt="" >  --> 
+            <!--   <img  th:if="${perfil.foto != null}" th:src="${'/foto/usuario/' + perfil.idUsuario'}" alt="" >
+               <img  th:if="${perfil.foto == null}" src="assets/images/Forms/undraw_male_avatar_323b.svg" alt="" >  --> 
             
             
             
             
             <form action ="/usuario/actualizar-perfil" method="POST" enctype="multipart/form-data" class="Register-Form-F">
-
+               
                <p th:if="${error != null}" th:text="${error}" style="color: red"></p>
 
                <input type="hidden"  name="idUsuario" th:value="${perfil.idUsuario}">
@@ -73,21 +73,21 @@
 
     </div>
     </main>
-     <footer class="titulares">
+    <footer class="titulares">
         <div>
-            <img src="assets/images/phone (1).png" alt="" width="40px" height="40px">
+            <img src="/assets/images/phone (1).png" alt="" width="40px" height="40px">
             <p> Contacto:</p>
                 <span>0800-555-334</span>
         </div>
 
         <div>
-            <img src="assets/images/gmail.png" alt="" width="40px" height="40px">
+            <img src="/assets/images/gmail.png" alt="" width="40px" height="40px">
             <p>  Gmail:</p>
             <span>infoFixture@gmail.com</span>
         </div>
 
         <div>
-            <span><img src="assets/images/copyright (1).png" alt="" width="40px" height="40px">All Rights Reserved</span>
+            <span><img src="/assets/images/copyright (1).png" alt="" width="40px" height="40px">All Rights Reserved</span>
         </div>
     </footer>
 </body>

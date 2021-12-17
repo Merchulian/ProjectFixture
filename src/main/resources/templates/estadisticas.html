@@ -21,221 +21,176 @@
         <ul>
 
             <li class="nav-bar" ><a href="/inicio">Inicio</a></li>
-            <li class="nav-bar"><a href="/noticias">Noticias</a></li>
+            <li class="nav-bar"><a href="/noticias/login">Noticias</a></li>
             <li class="nav-bar"><a href="/fixture">Fixture</a></li>
             
 
-            <li class="nav-bar"><a href="/login">Login</a></li>
-            <li class="nav-bar"><a href="/registro">Register</a></li>
+            <li class="nav-bar"><a href="/logout">Salir</a></li>
+            <li><a th:href="@{/usuario/editar-perfil(id=__${session.usuariosession.idUsuario}__)}">Editar Perfil</a></li>
         </ul>
 
     </nav>
 </header>
 
   <main class="container-tabla">
+    <div class="container m-5 TABLE-GRUP-A">
+		<table >
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Goles a Favor</th>
+					<th scope="col">Goles en Contra</th>
+                                        <th scope="col">Puntaje</th>
+				</tr>
+			</thead>
+			<tbody th:each="equipo,iteracion : ${perfil.fixture.listaEquipos}">
+				<tr>
+					<th scope="row" th:if="${iteracion.index == 0 }" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 0 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 0 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 0 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 1 }" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 1 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 1 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 1 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 2 }" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 2 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 2 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 2 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 3 }" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 3 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 3 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 3 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    
+    <div class="container m-5 TABLE-GRUP-B">
+		<table >
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Goles a Favor</th>
+					<th scope="col">Goles en Contra</th>
+                                        <th scope="col">Puntaje</th>
+				</tr>
+			</thead>
+			<tbody th:each="equipo,iteracion : ${perfil.fixture.listaEquipos}">
+				<tr>
+					<th scope="row" th:if="${iteracion.index == 4}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 4 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 4 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 4 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 5}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 5 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 5 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 5 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 6}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 6 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 6 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 6 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 7}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 7 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 7 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 7 }" th:text="${equipo.puntaje}"></td>
+				</tr>
 
-  <table action="/tabla" class="TABLE-GRUP-A">
+			</tbody>
+		</table>
+	</div>
+    
+    <div class="container m-5 TABLE-GRUP-C">
+		<table >
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Goles a Favor</th>
+					<th scope="col">Goles en Contra</th>
+                                        <th scope="col">Puntaje</th>
+				</tr>
+			</thead>
+			<tbody th:each="equipo,iteracion : ${perfil.fixture.listaEquipos}">
+				<tr>
+					<th scope="row" th:if="${iteracion.index == 8}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 8 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 8 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 8 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 9}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 9 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 9 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 9 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 10}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 10 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 10 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 10 }" th:text="${equipo.puntaje}"></td> 
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 11}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 11 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 11 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 11 }" th:text="${equipo.puntaje}"></td>
+				</tr>
 
-    <tr>
-      <th>Grupo A</th>
-      <th>Puntaje</th>
-      <th>GolesFavor</th>
-      <th>GolesContra</th>
-      <th>Goles de diferencia</th>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      
-
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </table>
-
-
-
-
-  <table class="TABLE-GRUP-B">
-
-    <tr>
-      <th>Grupo B</th>
-      <th>Puntaje</th>
-      <th>GolesFavor</th>
-      <th>GolesContra</th>
-      <th>Goles de diferencia</th>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      
-
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </table>
-
-
-
-
-  <table class="TABLE-GRUP-C">
-    <tr>
-      <th>Grupo C</th>
-      <th>Puntaje</th>
-      <th>GolesFavor</th>
-      <th>GolesContra</th>
-      <th>Goles de diferencia</th>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      
-
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </table>
-
-
-
-  <table class="TABLE-GRUP-D">
-
-    <tr>
-      <th>Grupo D</th>
-      <th>Puntaje</th>
-      <th>GolesFavor</th>
-      <th>GolesContra</th>
-      <th>Goles de diferencia</th>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      
-
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      
-      
-      <td>Independiente</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-  </table>
+			</tbody>
+		</table>
+	</div>
+    
+    <div class="container m-5 TABLE-GRUP-D">
+		<table >
+			<thead>
+				<tr>
+					<th scope="col">Nombre</th>
+					<th scope="col">Goles a Favor</th>
+					<th scope="col">Goles en Contra</th>
+                                        <th scope="col">Puntaje</th>
+				</tr>
+			</thead>
+			<tbody th:each="equipo,iteracion : ${perfil.fixture.listaEquipos}">
+				<tr>
+					<th scope="row" th:if="${iteracion.index == 12}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 12 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 12 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 12}" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 13}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 13 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 13 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 13}" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 14}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 14 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 14 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 14 }" th:text="${equipo.puntaje}"></td>
+				</tr>
+                                <tr>
+					<th scope="row" th:if="${iteracion.index == 15}" th:text="${equipo.pais}"></th>
+					<td  th:if="${iteracion.index == 15 }" th:text="${equipo.golesFavor}"></td>
+					<td   th:if="${iteracion.index == 15 }" th:text="${equipo.golesContra}"></td>
+                                        <td   th:if="${iteracion.index == 15}" th:text="${equipo.puntaje}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+  
 </main>
 
 

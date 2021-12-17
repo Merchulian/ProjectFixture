@@ -41,7 +41,7 @@
 
     
 
-    @media only screen and (max-width:1000px) and (min-width:200px){
+    @media only screen and (max-width:1000px) and (min-width:320px){
       body {
         display: flex;
         flex-direction: column;
@@ -434,6 +434,12 @@
           flex-grow: 1;
           flex-shrink: 2;
         }
+        .Container-Register-Login{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
         .Register-P{
     
           font-family: 'Kanit', sans-serif;
@@ -485,9 +491,68 @@
         }
 
 
+        table {
+          table-layout: fixed;
+          
+          
+          border-collapse: collapse;
+          border: 2px solid black;
+          font-family: 'Kanit', sans-serif;
+          
+           
+          font-weight: 600;
+          overflow-x: scroll;
+          font-size: 0.7em;
+          width: 60vh;
+         flex:0 0 100%;
+         background-image: url("./images/FIFA\ World\ Cup\ Qatar\ 2022.svg");
+         background-color: #D8D6D6;
+         background-size: contain;
+         background-repeat: no-repeat;
+         
+          
+        }
+       
+        table th{
+          text-decoration: underline 2px solid crimson;
+        }
+        table td:nth-child(2){
+          text-align: center;
+        }
+        table td:nth-child(3){
+          text-align: center;
+        }
+        table td:nth-child(4){
+          text-align: center;
+        }
+        table td:nth-child(5){
+          text-align: center;
+        }
+       
+        th, td {
+          padding: 20px;
+        }   
+      
+        .container-tabla{
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          margin:5vh;
+         
+          
+          overflow-x: scroll;
+        }
 
 
-
+        .BTN-SAVE{
+          border: none;
+          font-family: 'Kanit', sans-serif;
+          border: 1px solid black;
+          font-size: 1rem;
+        }
+    
 
 
 
@@ -528,6 +593,8 @@
         flex-direction: column;
         min-height: 100vh;
         background-color:white;
+        padding: 0;
+        margin: 0;
       }
   
       main {
@@ -535,8 +602,20 @@
         margin: 0;
         padding: 0;
       }
+
+
+    
+    
+
+
+
+
       .logo{
         margin-top: 1.2vh;
+      }
+      .logo img{
+        height: inherit;
+        width: 15vh;
       }
   
       .titulares {
@@ -547,6 +626,7 @@
         display: flex;
         justify-content: space-around;
         font-family: 'Kanit', sans-serif;
+       
         
         
   
@@ -556,7 +636,7 @@
       .fixture-titulo{
   
         font-family: 'Kanit', sans-serif;
-        font-size: 55px;
+        font-size: 2.5em;
         align-self: center;
        
       }
@@ -570,6 +650,7 @@
     li a{
       text-decoration: none;
       color: white;
+      font-size: 1.8rem;
     }
     a:visited{
       text-decoration:none;
@@ -577,7 +658,7 @@
       
     }
     li a:hover{
-      font-size: 24px;
+      font-size: 2.2rem;
       color: tomato;
     }
   
@@ -591,7 +672,7 @@
           align-items: center;
           margin: 0;
           padding: 0;
-          height: 10vh;
+          height: 15vh;
           border-bottom:2px solid crimson;
           font-family: 'Kanit', sans-serif;
           box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
@@ -599,12 +680,13 @@
         
         .menu ul {
           display: flex;
+          
         }
   
         .menu li {
           padding: .5rem;
         }
-        .menu li:nth-child(4){
+        .menu li:nth-child(3){
         border-right: 1px solid white;
   
         }
@@ -919,14 +1001,19 @@
 
     }
 
-
+    .BTN-SAVE{
+      border: none;
+      font-family: 'Kanit', sans-serif;
+      border: 1px solid black;
+      font-size: 1rem;
+    }
 
     .Container-Register{
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       background-image: url("./images/Forms/undraw_junior_soccer_6sop.svg");
-      background-position: center;
+      background-position:right;
       background-size:100vh;
       background-repeat: no-repeat;
       
@@ -939,7 +1026,7 @@
       -webkit-border-radius: 25px;
         -moz-border-radius: 25px;
         border-radius: 25px;
-      min-width: 20%;
+      min-width: 30%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -987,8 +1074,116 @@
       text-align: center;
     }
   
+
+    table {
+      table-layout: fixed;
+      
+      
+      border-collapse: collapse;
+      border: 2px solid black;
+      font-family: 'Kanit', sans-serif;
+      font-size: 24px;
+       
+      font-weight: 600;
+      
+      
+      
+    }
+    
+    table th{
+      text-decoration: underline 2px solid crimson;
+    }
+    table td:nth-child(2){
+      text-align: center;
+    }
+    table td:nth-child(3){
+      text-align: center;
+    }
+    table td:nth-child(4){
+      text-align: center;
+    }
+    table td:nth-child(5){
+      text-align: center;
+    }
    
+    th, td {
+      padding: 20px;
+    }   
+    th{
+      border-bottom: 2px solid black;
+    } 
+    th:nth-child(1){
+      width: 20%;
      
+    }
+    th:nth-child(2){
+      width: 10%;
+     
+    }
+    th:nth-child(3){
+      width: 10%;
+    }
+    th:nth-child(4){
+      width: 10%;
+    }
+    th:nth-child(5){
+      width: 10%;
+    }
+    .TABLE-GRUP-A{
+      border-bottom: none;
+      margin-bottom: 2.5vh;
+      width: 40%;
+    }  
+    .TABLE-GRUP-B{
+      border-bottom: none;
+      width: 40%;
+      margin-top: 0;
+      margin-bottom: 2.5vh;
+    }
+    .TABLE-GRUP-C{
+      border-bottom: none;
+      width: 40%;
+      margin-top: 0;
+      
+    }
+    .TABLE-GRUP-D{
+      border-bottom: none;
+      width: 40%;
+    
+    }
+    .container-tabla{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin:5vh;
+      background-image: url("./images/FIFA\ World\ Cup\ Qatar\ 2022.svg");
+      background-color: #D8D6D6;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+
+    .Container-Register-Login{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-image: url("./images/Forms/undraw_junior_soccer_6sop.svg");
+      background-position: center;
+      background-size:100vh;
+      background-repeat: no-repeat;
+      min-height: 60vh;
+      
+
+    }
+
+    .IMG-USUARIO{
+      -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+   
     }
   
 
